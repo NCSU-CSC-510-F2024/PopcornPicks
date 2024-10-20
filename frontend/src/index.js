@@ -1,5 +1,5 @@
-import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './stylesheet.css'; // Your custom CSS file
 
 import App from './App';
 import React from 'react';
