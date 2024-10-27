@@ -13,9 +13,11 @@ from flask_cors import CORS
 from search import Search
 from utils import beautify_feedback_data, send_email_to_user
 
-sys.path.append("../../")
+#sys.path.append("../../")
+sys.path.append("/app/")
+
+from src.prediction_scripts.item_based import recommend_for_new_user 
 #pylint: disable=wrong-import-position
-from src.prediction_scripts.item_based import recommend_for_new_user
 #pylint: enable=wrong-import-position
 
 
@@ -101,4 +103,4 @@ def success():
 
 
 if __name__ == "__main__":
-    app.run(port=5000)
+    app.run(host="0.0.0.0",port=5000,debug=True)
