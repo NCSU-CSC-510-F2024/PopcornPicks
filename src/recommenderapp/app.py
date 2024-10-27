@@ -55,8 +55,11 @@ def predict():
             training_data.append(movie_with_rating)
     recommendations, genres, imdb_id = recommend_for_new_user(training_data)
     recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
+    #for movie in recommendations:
+
     resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id}
     #This is where streaming info will be added
+    #resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id, "streaming_info": streaming}
     return resp
 
 
