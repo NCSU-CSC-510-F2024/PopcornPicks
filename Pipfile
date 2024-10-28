@@ -15,6 +15,7 @@ flask-sqlalchemy="*"
 psycopg2-binary="*"
 python-dotenv = "*"
 werkzeug = "*"
+pyjwt = "*"
 
 [dev-packages]
 

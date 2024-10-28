@@ -8,10 +8,12 @@ This code is licensed under MIT license (see LICENSE for details)
 import json
 import sys
 import os
+import jwt
+from datetime import datetime, timedelta
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 load_dotenv()
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash,check_password_hash
 
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
@@ -64,8 +66,32 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route("/login",methods=['POST'])
 def login_user():
-    request_obj=request.data
-    return jsonify({"message": "User Created"}), 200
+    try:
+        # Get JSON data from the request
+        data = request.get_json()
+        username = data.get('username')
+        password = data.get('password')
+
+        # Check if the user exists
+        user = User.query.filter_by(username=username).first()
+        if not user or not check_password_hash(user.password, password):
+            return jsonify({'error': 'Invalid username or password'}), 401
+
+        # Generate a JWT token valid for 1 hour
+        token = jwt.encode(
+            {
+                'user_id': user.id,
+                'exp': datetime.now() + timedelta(hours=1)
+            },
+            app.config['SECRET_KEY'],
+            algorithm='HS256'
+        )
+
+        # Return the token in the response
+        return jsonify({'token': token}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route("/createUser",methods=['POST'])
 def create_user():
