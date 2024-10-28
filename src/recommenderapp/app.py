@@ -7,6 +7,10 @@ This code is licensed under MIT license (see LICENSE for details)
 
 import json
 import sys
+import os
+from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+load_dotenv()
 
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
@@ -22,6 +26,35 @@ from src.prediction_scripts.item_based import recommend_for_new_user
 
 
 app = Flask(__name__)
+#format for the value in below key-value pair is postgresql://username:password@host:port/database_name
+
+app.config['SQLALCHEMY_DATABASE_URI']= f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PW')}@postgres:5432/{os.getenv('POSTGRES_DB')}"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#db is an instance of sqlalchemy tied to the flask app.
+db = SQLAlchemy(app)
+from sqlalchemy import Column, Integer, String
+
+class User(db.Model):
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    username = Column(String(80), unique=True, nullable=False)
+    password = Column(String(120),nullable=False)
+
+    def __repr__(self):
+        return f"<User {self.username}>"
+
+try:
+    with app.app_context():
+        print("Attempting to create tables")
+        db.create_all()
+        print(f"Tables created successfully")
+except Exception as e:
+    print(f"Error creating database tables:{e}")
+
+
+
+
 app.secret_key = "secret key"
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})

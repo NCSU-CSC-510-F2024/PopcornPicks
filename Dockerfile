@@ -16,7 +16,7 @@ COPY Pipfile Pipfile.lock /app/
 RUN pip install pipenv && pipenv install --system
 
 # Copy the rest of the application code into the working directory
-COPY . /app
+COPY . .
 
 # Expose the port that the Flask app will run on
 EXPOSE 5000
