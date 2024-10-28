@@ -10,6 +10,7 @@ import sys
 sys.path.append("/app/")
 import os
 import jwt
+from functools import wraps
 from datetime import datetime, timedelta
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
@@ -55,7 +56,6 @@ def login_user():
             app.config['SECRET_KEY'],
             algorithm='HS256'
         )
-
         # Return the token in the response
         return jsonify({'token': token}), 200
 
@@ -80,14 +80,53 @@ def create_user():
         # Create a new user and hash the password for security
         hashed_password = generate_password_hash(password, method='scrypt')
         new_user = User(username=username, password=hashed_password)
-
         db.session.add(new_user)
         db.session.commit()
-
         return jsonify({'message': 'User created successfully', 'user': new_user.username}), 201
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+
+    
+#send the request to this function
+def get_user_id(f):
+    @wraps(f)
+    def decode_token(*args,**kwargs):
+        #Extract token from the Authorization header
+        auth_header = request.headers.get('Authorization')
+        if not auth_header:
+            return jsonify({'error': 'Authorization header missing'}), 401
+        
+        # The format should be "Bearer <token>"
+        try:
+            token = auth_header.split(" ")[1]  # Extract the token part
+        except IndexError:
+            return jsonify({'error': 'Token missing'}), 401
+
+        try:
+            # Decode and verify the JWT
+            decoded = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+            print(f"{decoded}")  # Contains the payload (e.g., user_id, exp, etc.)
+            request.userId=decoded['user_id']
+        except jwt.ExpiredSignatureError:
+            print(f"Token expired")
+            return jsonify({'error': 'Token has expired'}), 401
+        except jwt.InvalidTokenError:
+            print(f"Invalid token")
+            return jsonify({'error': 'Invalid token'}), 401
+        except Exception as e:
+            return jsonify({'error':f'Server side issue {e}'}), 401
+        return f(*args,**kwargs)
+    #decode_token.__name__=f.__name__
+    return decode_token
+        
+
+@app.route("/testToken",methods=['POST'])
+@get_user_id
+def test_decoding():
+    return jsonify({'user':request.userId}), 201
 
 
 @app.route("/")
@@ -175,5 +214,9 @@ if __name__ == "__main__":
             app.run(host="0.0.0.0",port=5000,debug=True)
     except Exception as e:
         print(f"Error creating database tables:{e}")
+
+
+
+
 
     
