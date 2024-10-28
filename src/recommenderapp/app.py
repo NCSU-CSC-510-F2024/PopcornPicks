@@ -7,6 +7,7 @@ This code is licensed under MIT license (see LICENSE for details)
 
 import json
 import sys
+sys.path.append("/app/")
 import os
 import jwt
 from datetime import datetime, timedelta
@@ -14,51 +15,19 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 load_dotenv()
 from werkzeug.security import generate_password_hash,check_password_hash
-
+from src.models.user_models import db, User
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from search import Search
 from utils import beautify_feedback_data, send_email_to_user
-
-#sys.path.append("../../")
-sys.path.append("/app/")
-
 from src.prediction_scripts.item_based import recommend_for_new_user 
-#pylint: disable=wrong-import-position
-#pylint: enable=wrong-import-position
-
-
-app = Flask(__name__)
+app= Flask(__name__)
 #format for the value in below key-value pair is postgresql://username:password@host:port/database_name
-
 app.config['SQLALCHEMY_DATABASE_URI']= f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PW')}@postgres:5432/{os.getenv('POSTGRES_DB')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#db is an instance of sqlalchemy tied to the flask app.
-db = SQLAlchemy(app)
-from sqlalchemy import Column, Integer, String
-
-class User(db.Model):
-    __tablename__ = 'users'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    username = Column(String(80), unique=True, nullable=False)
-    password = Column(String(300),nullable=False)
-
-    def __repr__(self):
-        return f"<User {self.username}>"
-
-try:
-    with app.app_context():
-        print("Attempting to create tables")
-        db.create_all()
-        print(f"Tables created successfully")
-except Exception as e:
-    print(f"Error creating database tables:{e}")
+app.config['SECRET_KEY']=os.getenv('APP_SECRET_KEY')
 
 
-
-
-app.secret_key = "secret key"
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
@@ -197,4 +166,14 @@ def success():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0",port=5000,debug=True)
+    try:
+        with app.app_context():
+            print("Attempting to create tables")
+            db.init_app(app)
+            db.create_all()
+            print(f"Tables created successfully")
+            app.run(host="0.0.0.0",port=5000,debug=True)
+    except Exception as e:
+        print(f"Error creating database tables:{e}")
+
+    
