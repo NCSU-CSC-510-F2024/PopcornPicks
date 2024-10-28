@@ -11,6 +11,9 @@ flask-cors = "*"
 autopep8 = "*"
 pytest = "*"
 pytest-cov = "*"
+flask-sqlalchemy="*"
+psycopg2-binary="*"
+python-dotenv = "*"
 
 [dev-packages]
 

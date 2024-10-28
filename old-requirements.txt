@@ -6,15 +6,6 @@ autopep8==2.0.4
 pytest==7.4.2
 pytest-cov==4.1.0
 
- pgadmin:
-  container_name: pgadmin
-  image: dpage/pgadmin4:latest
-  environment:
-   - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
-   - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW}
-  ports:
-   - "5050:5050"
-  restart: always
 
-  /Users/anirudhkaluri/Library/Containers/com.docker.docker/Data/vms/0/data
-  
+
+
