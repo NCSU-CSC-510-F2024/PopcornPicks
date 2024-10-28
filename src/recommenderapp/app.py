@@ -11,6 +11,7 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 load_dotenv()
+from werkzeug.security import generate_password_hash
 
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
@@ -39,7 +40,7 @@ class User(db.Model):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String(80), unique=True, nullable=False)
-    password = Column(String(120),nullable=False)
+    password = Column(String(300),nullable=False)
 
     def __repr__(self):
         return f"<User {self.username}>"
@@ -58,6 +59,40 @@ except Exception as e:
 app.secret_key = "secret key"
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
+
+
+@app.route("/login",methods=['POST'])
+def login_user():
+    request_obj=request.data
+    return jsonify({"message": "User Created"}), 200
+
+@app.route("/createUser",methods=['POST'])
+def create_user():
+    request_obj=request.data
+    try:
+        # Get JSON data from the request
+        data = request.get_json()
+        # Extract the username and password from the request data
+        username = data.get('username')
+        password = data.get('password')
+
+        # Check if the username already exists
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            return jsonify({'error': 'Username already exists'}), 409
+
+        # Create a new user and hash the password for security
+        hashed_password = generate_password_hash(password, method='scrypt')
+        new_user = User(username=username, password=hashed_password)
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        return jsonify({'message': 'User created successfully', 'user': new_user.username}), 201
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 @app.route("/")
