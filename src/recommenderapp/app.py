@@ -155,8 +155,9 @@ def get_watchlist():
         data = request.get_json()
         username = data.get('username')
         existing_user = User.query.filter_by(username=username).first()
-        if not existing_user:
-            return jsonify({'error': 'No items in watchlist'}), 409
+        #if the watchlist is empty for this user, return False
+        if (not existing_user):
+            return False
         user_Watchlist = Watchlist.filter(username = username).all()
         return user_Watchlist
     except:
@@ -220,13 +221,19 @@ def predict():
     recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
 
     inWatchlist = []
+    watchlist = get_watchlist()
+
+
     #iterate through the list of imdb_ids and check
     #if they are present in the watchlist
-    for id in imdb_id:
-        watchlist = get_watchlist()
-        if(watchlist.query.filter_by(imdbID = imdb_id).first()):
-            inWatchlist.append(True)
-        else:
+    if(watchlist):
+        for id in imdb_id:
+            if(watchlist.query.filter_by(imdbID = imdb_id).first()):
+                inWatchlist.append(True)
+            else:
+                inWatchlist.append(False)
+    else:
+        for id in imdb_id:
             inWatchlist.append(False)
 
     resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id, "Watchlist_status": inWatchlist}
