@@ -154,10 +154,11 @@ def get_watchlist():
     try:
         data = request.get_json()
         username = data.get('username')
-        existing_user = User.query.filter_by(username=username).first()
+        existing_user = Watchlist.query.filter_by(username=username).first()
         #if the watchlist is empty for this user, return False
         if (not existing_user):
             return False
+        #get splice of watchlist with only the username items
         user_Watchlist = Watchlist.filter(username = username).all()
         return user_Watchlist
     except:
@@ -174,9 +175,11 @@ def add_to_watchlist():
         movie = data.get('movie')
         imdbID = data.get('imdbID')
         existing_entry = Watchlist.query.filter_by(username=username, imdbID = imdbID).first()
+        #if the watchlist already contains the movie for this user, return an error message
         if(existing_entry):
             return jsonify({'error': 'Item already in watchlist'}), 409
         
+        #If not, create a new entry and add it to the session
         new_entry = Watchlist(username=username, movie = movie, imdbID = imdbID)
         db.session.add(new_entry)
         db.session.commit()
@@ -196,9 +199,11 @@ def delete_from_watchlist():
         movie = data.get('movie')
         imdbID = data.get('imdbID')
         existing_entry = Watchlist.query.filter_by(username=username, imdbID = imdbID).first()
+        #If the item to be deleted is not in the watchlist, raise an error message
         if(not existing_entry):
             return jsonify({'error': 'Item not already in watchlist'}), 409
-        
+        #Otherwise delete item from the session
+        #Watchlist.delete.where(username = username, imdbID = imdbID)
         db.session.delete(existing_entry)
         return jsonify({'message': 'Watchlist entry deleted successfully', 'movie_deleted': existing_entry.movie}), 201
     except:
