@@ -15,7 +15,7 @@ const LandingPage = () => {
  const getStarted = () => {
   setLoading(true); // Show the loader
   setTimeout(() => {
-    navigate('/search_page'); // Replace with your actual route
+    navigate('/login'); 
   }, 2000);
 };
 
