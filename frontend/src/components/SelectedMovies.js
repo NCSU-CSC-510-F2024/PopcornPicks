@@ -1,9 +1,11 @@
 import React from 'react';
 
-const SelectedMovies = () => {
+const SelectedMovies = ({ movies }) => {
   return (
-    <ul className="list-group" id="selectedMovies">
-      {/* Selected movies will be populated here */}
+    <ul id="selectedMovies" className="list-group mt-2">
+      {movies.map((movie, index) => (
+        <li key={index} className="list-group-item">{movie}</li>
+      ))}
     </ul>
   );
 };
