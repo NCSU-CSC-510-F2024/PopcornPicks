@@ -1,25 +1,26 @@
+import React, { useState } from 'react';
 import { Alert, Button, Card, Container, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
-
 import Navbar from './NavBar';
 import { loginUser } from '../apiCalls';
+import { useAuth } from '../AuthContext'; // Import the useAuth hook
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth(); // Use the login function from AuthContext
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
     try {
-      const response = await loginUser(email, password);
-      localStorage.setItem('token', response.token);
+      const response = await loginUser(username, password);
+      login(response.token); // Store the token using the login function from AuthContext
       navigate('/search_page');
     } catch (err) {
-      setError('Invalid email or password');
+      setError('Invalid username or password');
     }
   };
 
@@ -32,12 +33,12 @@ const Login = () => {
             <h2 className="text-center mb-4">Sign In</h2>
             {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={handleSubmit}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3" controlId="formBasicUsername">
                 <Form.Control 
-                  type="email" 
-                  placeholder="Email or phone number" 
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  type="text" 
+                  placeholder="Username" 
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   required
                   style={{ backgroundColor: '#333', color: 'white', border: 'none', padding: '10px' }}
                 />
