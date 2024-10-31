@@ -1,6 +1,6 @@
 # <i> PopcornPicks🍿: Your Destination for Movie Recommendations </i>
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://gitHub.com//CSCI510testerhw1/PopcornPicks/graphs/commit-activity) 
-[![Contributors Activity](https://img.shields.io/github/commit-activity/m/adipai/PopcornPicks)](https://github.com/CSCI510testerhw1/PopcornPicks/pulse) 
+[![Contributors Activity](https://img.shields.io/github/commit-activity/m/CSCI510testerhw1/PopcornPicks)](https://github.com/CSCI510testerhw1/PopcornPicks/pulse) 
 [![GitHub issues](https://img.shields.io/github/issues/CSCI510testerhw1/PopcornPicks.svg)](https://github.com/CSCI510testerhw1/PopcornPicks/issues?q=is%3Aopen+is%3Aissue) 
 [![GitHub issues-closed](https://img.shields.io/github/issues-closed/CSCI510testerhw1/PopcornPicks.svg)](https://github.com/CSCI510testerhw1/PopcornPicks/issues?q=is%3Aissue+is%3Aclosed) 
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/CSCI510testerhw1/PopcornPicks) 
