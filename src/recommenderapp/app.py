@@ -172,7 +172,6 @@ def add_to_watchlist():
     try:
         data = request.get_json()
         username = data.get('username')
-        movie = data.get('movie')
         imdbID = data.get('imdbID')
         existing_entry = Watchlist.query.filter_by(username=username, imdbID = imdbID).first()
         #if the watchlist already contains the movie for this user, return an error message
@@ -180,10 +179,10 @@ def add_to_watchlist():
             return jsonify({'error': 'Item already in watchlist'}), 409
         
         #If not, create a new entry and add it to the session
-        new_entry = Watchlist(username=username, movie = movie, imdbID = imdbID)
+        new_entry = Watchlist(username=username, imdbID = imdbID)
         db.session.add(new_entry)
         db.session.commit()
-        return jsonify({'message': 'Watchlist entry created successfully', 'movie_added': new_entry.movie}), 201
+        return jsonify({'message': 'Watchlist entry created successfully', 'Whose watchlist was added': new_entry.username}), 201
     except:
         return("error adding to watchlist")
     
@@ -196,7 +195,7 @@ def delete_from_watchlist():
     try:
         data = request.get_json()
         username = data.get('username')
-        movie = data.get('movie')
+        #movie = data.get('movie')
         imdbID = data.get('imdbID')
         existing_entry = Watchlist.query.filter_by(username=username, imdbID = imdbID).first()
         #If the item to be deleted is not in the watchlist, raise an error message
@@ -205,7 +204,7 @@ def delete_from_watchlist():
         #Otherwise delete item from the session
         #Watchlist.delete.where(username = username, imdbID = imdbID)
         db.session.delete(existing_entry)
-        return jsonify({'message': 'Watchlist entry deleted successfully', 'movie_deleted': existing_entry.movie}), 201
+        return jsonify({'message': 'Watchlist entry deleted successfully', 'Whose watchlist I deleted': existing_entry.username}), 201
     except:
         return("error deleting from watchlist")
 
@@ -229,21 +228,21 @@ def predict():
     watchlist = get_watchlist()
 
 
-    #iterate through the list of imdb_ids and check
-    #if they are present in the watchlist
+    # iterate through the list of imdb_ids and check
+    # if they are present in the watchlist
 
-    # if(watchlist):
-    #     for id in imdb_id:
-    #         if(watchlist.query.filter_by(imdbID = imdb_id).first()):
-    #             inWatchlist.append(True)
-    #         else:
-    #             inWatchlist.append(False)
-    # else:
-    #     for id in imdb_id:
-    #         inWatchlist.append(False)
+    if(watchlist):
+        for id in imdb_id:
+            if(watchlist.query.filter_by(imdbID = imdb_id).first()):
+                inWatchlist.append(True)
+            else:
+                inWatchlist.append(False)
+    else:
+        for id in imdb_id:
+            inWatchlist.append(False)
 
-    # resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id, "Watchlist_status": inWatchlist}
-    resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id}
+    resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id, "Watchlist_status": inWatchlist}
+    #resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id}
     return resp
 
 
