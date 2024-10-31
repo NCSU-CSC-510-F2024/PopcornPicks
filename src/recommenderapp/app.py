@@ -62,6 +62,9 @@ def login_user():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
+
+
 @app.route("/createUser",methods=['POST'])
 def create_user():
     request_obj=request.data
@@ -86,8 +89,6 @@ def create_user():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-
 
     
 #send the request to this function
@@ -159,6 +160,7 @@ def predict():
             training_data.append(movie_with_rating)
     recommendations, genres, imdb_id = recommend_for_new_user(training_data)
     recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
+
     resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id}
     return resp
 
