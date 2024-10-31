@@ -1,7 +1,9 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../AuthContext';
 import '../stylesheet.css';
+
+import { Link, useNavigate } from 'react-router-dom';
+
+import React from 'react';
+import { useAuth } from '../AuthContext';
 
 const Navbar = () => {
     const { token, logout } = useAuth();
@@ -24,11 +26,15 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         {token && (
-                            <li className="nav-item">
-                                <Link className="nav-link" to="">Search</Link>
-                            </li>
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/watchlist">Watchlist</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/search">Search</Link>
+                                </li>
+                            </>
                         )}
-                        {/* Add more nav items as needed */}
                     </ul>
                     <div className="d-flex">
                         {token ? (

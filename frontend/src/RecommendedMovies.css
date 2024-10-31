@@ -1,0 +1,70 @@
+.recommended-movies {
+    padding: 20px 0;
+  }
+  
+  .movie-card {
+    background-color: #2f2f2f;
+    border: none;
+    transition: transform 0.2s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .movie-card:hover {
+    transform: scale(1.03);
+  }
+  
+  .movie-card .card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .movie-card .movie-title {
+    color: #ffffff;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    /* For long titles */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  
+  .movie-card .genre-container {
+    margin-bottom: 0.5rem;
+    flex-grow: 1;
+  }
+  
+  .movie-card .badge {
+    font-size: 0.7rem;
+    cursor: pointer;
+  }
+  
+  .movie-card .card-text {
+    color: #cccccc;
+  }
+  
+  .movie-card .card-footer {
+    background-color: transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.75rem;
+  }
+  
+  .imdb-link {
+    color: #f5c518;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  .imdb-link:hover {
+    text-decoration: underline;
+  }
+  
+  .movie-card .badge-success {
+    background-color: #28a745;
+    color: white;
+    font-size: 0.9rem;
+  }

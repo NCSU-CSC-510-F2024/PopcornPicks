@@ -1,0 +1,39 @@
+.watchlist-container {
+    padding-top: 60px;
+    min-height: 100vh;
+  }
+  
+  .watchlist-card {
+    background-color: #2f2f2f;
+    border: none;
+    transition: transform 0.2s;
+  }
+  
+  .watchlist-card:hover {
+    transform: scale(1.03);
+  }
+  
+  .watchlist-card .card-title {
+    color: #ffffff;
+    font-size: 1.1rem;
+  }
+  
+  .watchlist-card .card-text {
+    color: #cccccc;
+  }
+  
+  .watchlist-card .card-footer {
+    background-color: transparent;
+    border-top: none;
+  }
+  
+  .watchlist-card .btn-danger {
+    width: 100%;
+    background-color: #e50914;
+    border-color: #e50914;
+  }
+  
+  .watchlist-card .btn-danger:hover {
+    background-color: #f40612;
+    border-color: #f40612;
+  }

@@ -90,7 +90,7 @@ const SearchMovies = () => {
       <Navbar />
       <div className="netflix-bg">
       <Navbar />
-      <Container className="mt-5">
+      <Container className="mt-3">
         <Row className="justify-content-center mb-4">
           <Col md={8} className="text-center">
             <h1 className="netflix-header">🎬 Pick a Movie! 🎬</h1>
