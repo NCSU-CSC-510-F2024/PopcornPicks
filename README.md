@@ -143,6 +143,10 @@ The future of PopcornPicks is full of potential, and we invite developers, movie
 Please refer to the [CONTRIBUTING.md](https://github.com/adipai/PopcornPicks/blob/master/CONTRIBUTING.md) if you want to contribute to the PopcornPicks source code. Follow all the guidelines mentioned in the same and raise a pull request, we would love to look at it ❤️❤️!
 
 ## Contributors
+[Jonas Trepanier](www.linkedin.com/in/jonas-trepanier-b96a2a241)<br/>
+[Siddhi Mule](https://www.linkedin.com/in/ananya-mantravadi/)<br/>
+[Anirduh Kaluri](https://www.linkedin.com/in/rishi-singhal1101/)<br/>
+## Original Contributors:
 [Aditya Pai Brahmavar](https://www.linkedin.com/in/adityapai16/)<br/>
 [Ananya Mantravadi](https://www.linkedin.com/in/ananya-mantravadi/)<br/>
 [Rishi Singhal](https://www.linkedin.com/in/rishi-singhal1101/)<br/>
