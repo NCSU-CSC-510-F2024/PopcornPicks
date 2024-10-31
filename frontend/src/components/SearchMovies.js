@@ -4,7 +4,6 @@ import { Button, Col, Container, Form, ListGroup, Row } from 'react-bootstrap';
 import React, { useCallback, useEffect, useState } from 'react';
 import { addToWatchlist, deleteFromWatchlist, predictMovies, searchMovies } from '../apiCalls';
 
-import Loader from './Loader';
 import Navbar from './NavBar';
 import RecommendedMovies from './RecommendedMovies';
 import SelectedMovies from './SelectedMovies';

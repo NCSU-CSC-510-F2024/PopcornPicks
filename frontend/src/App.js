@@ -13,7 +13,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 import React from 'react';
 import Register from './components/Register';
 import SearchMovies from './components/SearchMovies';
-import Success from './components/Success';
 import Watchlist from './components/Watchlist';
 
 function App() {
