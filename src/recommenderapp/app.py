@@ -227,11 +227,11 @@ def predict():
     recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
     isInWatchList=[]
     for imdb in imdb_id:
-        existing_watchlist_movie=Watchlist.query.filter_by(user_id=request.userID,imdb_id=imdb)
+        existing_watchlist_movie=Watchlist.query.filter_by(user_id=request.userID,imdb_id=imdb).first()
         if existing_watchlist_movie is not None:
-            isInWatchList.append(False)
-        else:
             isInWatchList.append(True)
+        else:
+            isInWatchList.append(False)
 
     resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id, "Watchlist_status": isInWatchList}
     return resp
