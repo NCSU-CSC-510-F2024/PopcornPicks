@@ -1,0 +1,77 @@
+/* SearchMovies.css */
+
+.netflix-bg {
+   
+    min-height: 100vh;
+    color: #ffffff;
+  }
+  
+  .netflix-header {
+    font-size: 3rem;
+    font-weight: bold;
+    
+    margin-top: 100px;
+  }
+  
+  
+  
+  .netflix-search-input {
+    background-color: #333;
+    border: none;
+    color: #fff;
+  }
+  
+  .netflix-search-input:focus {
+    background-color: #7a7676;
+    color: #fff;
+    box-shadow: none;
+  }
+  
+  .netflix-search-results {
+    background-color: #333;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .netflix-search-item {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s;
+  }
+  
+  .netflix-search-item:hover {
+    background-color: #444;
+  }
+  
+    
+/* Styles for SelectedMovies component */
+.selected-movies-container {
+    margin-top: 1rem;
+  }
+  
+  .netflix-card {
+    background-color: #2f2f2f;
+    border: none;
+    color: #ffffff;
+    transition: transform 0.2s;
+  }
+  
+  .netflix-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .netflix-card .card-title {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .netflix-button-outline {
+    color: #e50914;
+    border-color: #e50914;
+  }
+  
+  .netflix-button-outline:hover {
+    background-color: #e50914;
+    color: #ffffff;
+  }
