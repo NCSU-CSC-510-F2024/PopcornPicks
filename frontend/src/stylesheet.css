@@ -93,6 +93,7 @@ body {
   font-size: 1.8rem;
 }
 
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .main-title {
