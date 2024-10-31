@@ -231,17 +231,19 @@ def predict():
 
     #iterate through the list of imdb_ids and check
     #if they are present in the watchlist
-    if(watchlist):
-        for id in imdb_id:
-            if(watchlist.query.filter_by(imdbID = imdb_id).first()):
-                inWatchlist.append(True)
-            else:
-                inWatchlist.append(False)
-    else:
-        for id in imdb_id:
-            inWatchlist.append(False)
 
-    resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id, "Watchlist_status": inWatchlist}
+    # if(watchlist):
+    #     for id in imdb_id:
+    #         if(watchlist.query.filter_by(imdbID = imdb_id).first()):
+    #             inWatchlist.append(True)
+    #         else:
+    #             inWatchlist.append(False)
+    # else:
+    #     for id in imdb_id:
+    #         inWatchlist.append(False)
+
+    # resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id, "Watchlist_status": inWatchlist}
+    resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id}
     return resp
 
 
