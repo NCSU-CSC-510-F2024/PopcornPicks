@@ -21,6 +21,7 @@ jobs:
         pip install pandas
         pip install -U Flask
         pip install -U flask-cors
+        pip install docker
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py')

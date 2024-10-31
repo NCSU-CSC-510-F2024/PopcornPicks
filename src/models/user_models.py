@@ -15,3 +15,11 @@ class User(db.Model):
 
     def __repr__(self):
         return f"<User {self.username}>"
+
+class Watchlist(db.Model):
+    __tablename__ = 'watchlists'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    username = Column(String(80), unique=True, nullable=False)
+    movie = Column(String(300), nullable=False)
+    imdbID = Column(String(80), nullable=False)

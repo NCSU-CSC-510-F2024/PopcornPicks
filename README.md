@@ -1,5 +1,19 @@
 # <i> PopcornPicks🍿: Your Destination for Movie Recommendations </i>
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://gitHub.com/adipai/PopcornPicks/graphs/commit-activity) [![Contributors Activity](https://img.shields.io/github/commit-activity/m/adipai/PopcornPicks)](https://github.com/adipai/PopcornPicks/pulse) [![GitHub issues](https://img.shields.io/github/issues/adipai/PopcornPicks.svg)](https://github.com/adipai/PopcornPicks/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues-closed](https://img.shields.io/github/issues-closed/adipai/PopcornPicks.svg)](https://github.com/adipai/PopcornPicks/issues?q=is%3Aissue+is%3Aclosed) ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/adipai/PopcornPicks) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4127507.svg)](https://doi.org/10.5281/zenodo.10023130) [![Unittest](https://github.com/adipai/PopcornPicks/actions/workflows/unittest.yml/badge.svg?branch=master&event=push)](https://github.com/adipai/PopcornPicks/actions/workflows/unittest.yml) [![codecov](https://codecov.io/gh/adipai/PopcornPicks/graph/badge.svg?token=0XN6K2DMGS)](https://codecov.io/gh/adipai/PopcornPicks) [![GitHub release](https://img.shields.io/github/release/adipai/PopcornPicks.svg)](https://GitHub.com/adipai/PopcornPicksreleases/) [![StyleCheck: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint) [![HitCount](https://hits.dwyl.com/adipai/PopcornPicks.svg)](https://hits.dwyl.com/adipai/PopcornPicks) ![GitHub contributors](https://img.shields.io/github/contributors/adipai/PopcornPicks) ![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/adipai/PopcornPicks) ![GitHub repo size](https://img.shields.io/github/repo-size/adipai/PopcornPicks)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://gitHub.com//CSCI510testerhw1/PopcornPicks/graphs/commit-activity) 
+[![Contributors Activity](https://img.shields.io/github/commit-activity/m/adipai/PopcornPicks)](https://github.com/CSCI510testerhw1/PopcornPicks/pulse) 
+[![GitHub issues](https://img.shields.io/github/issues/CSCI510testerhw1/PopcornPicks.svg)](https://github.com/CSCI510testerhw1/PopcornPicks/issues?q=is%3Aopen+is%3Aissue) 
+[![GitHub issues-closed](https://img.shields.io/github/issues-closed/CSCI510testerhw1/PopcornPicks.svg)](https://github.com/CSCI510testerhw1/PopcornPicks/issues?q=is%3Aissue+is%3Aclosed) 
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/CSCI510testerhw1/PopcornPicks) 
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4127507.svg)](https://doi.org/10.5281/zenodo.10023130) 
+[![Unittest](https://github.com/CSCI510testerhw1/PopcornPicks/actions/workflows/unittest.yml/badge.svg?branch=master&event=push)](https://github.com/CSCI510testerhw1/PopcornPicks/actions/workflows/unittest.yml) 
+[![codecov](https://codecov.io/gh/CSCI510testerhw1/PopcornPicks/graph/badge.svg?token=HUMM2BTSQO)](https://codecov.io/gh/CSCI510testerhw1/PopcornPicks)
+[![GitHub release](https://img.shields.io/github/release/CSCI510testerhw1/PopcornPicks.svg)](https://GitHub.com/CSCI510testerhw1/PopcornPicksreleases/) 
+[![StyleCheck: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint) 
+[![HitCount](https://hits.dwyl.com/CSCI510testerhw1/PopcornPicks.svg)](https://hits.dwyl.com/CSCI510testerhw1/PopcornPicks) 
+![GitHub contributors](https://img.shields.io/github/contributors/CSCI510testerhw1/PopcornPicks) 
+![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/CSCI510testerhw1/PopcornPicks) 
+![GitHub repo size](https://img.shields.io/github/repo-size/CSCI510testerhw1/PopcornPicks)
   
 
   
@@ -129,6 +143,10 @@ The future of PopcornPicks is full of potential, and we invite developers, movie
 Please refer to the [CONTRIBUTING.md](https://github.com/adipai/PopcornPicks/blob/master/CONTRIBUTING.md) if you want to contribute to the PopcornPicks source code. Follow all the guidelines mentioned in the same and raise a pull request, we would love to look at it ❤️❤️!
 
 ## Contributors
+[Jonas Trepanier](www.linkedin.com/in/jonas-trepanier-b96a2a241)<br/>
+[Siddhi Mule](https://www.linkedin.com/in/ananya-mantravadi/)<br/>
+[Anirduh Kaluri](https://www.linkedin.com/in/rishi-singhal1101/)<br/>
+## Original Contributors:
 [Aditya Pai Brahmavar](https://www.linkedin.com/in/adityapai16/)<br/>
 [Ananya Mantravadi](https://www.linkedin.com/in/ananya-mantravadi/)<br/>
 [Rishi Singhal](https://www.linkedin.com/in/rishi-singhal1101/)<br/>
