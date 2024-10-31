@@ -21,4 +21,4 @@ class Watchlist(db.Model):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id=db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)
-    imdbID = Column(String(80), nullable=False)
+    imdb_id = Column(String(80), nullable=False)

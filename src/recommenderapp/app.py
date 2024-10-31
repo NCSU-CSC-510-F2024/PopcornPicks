@@ -210,6 +210,7 @@ def delete_from_watchlist():
 
 
 @app.route("/predict", methods=["POST"])
+@get_user_id
 def predict():
     """
     Predicts movie recommendations based on user ratings.
@@ -223,26 +224,15 @@ def predict():
             training_data.append(movie_with_rating)
     recommendations, genres, imdb_id = recommend_for_new_user(training_data)
     recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
+    isInWatchList=[]
+    for imdb in imdb_id:
+        existing_watchlist_movie=Watchlist.query.filter_by(user_id=request.userId,imdb_id=imdb)
+        if existing_watchlist_movie is not None:
+            isInWatchList.append(True)
+        else:
+            isInWatchList.append(False)
 
-    inWatchlist = []
-    watchlist = get_watchlist()
-
-
-    # iterate through the list of imdb_ids and check
-    # if they are present in the watchlist
-
-    if(watchlist):
-        for id in imdb_id:
-            if(watchlist.query.filter_by(imdbID = imdb_id).first()):
-                inWatchlist.append(True)
-            else:
-                inWatchlist.append(False)
-    else:
-        for id in imdb_id:
-            inWatchlist.append(False)
-
-    resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id, "Watchlist_status": inWatchlist}
-    #resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id}
+    resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id, "Watchlist_status": isInWatchList}
     return resp
 
 
