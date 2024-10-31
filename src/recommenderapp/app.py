@@ -155,9 +155,9 @@ def get_watchlist():
         data = request.get_json()
         username = data.get('username')
         existing_user = Watchlist.query.filter_by(username=username).first()
-        #if the watchlist is empty for this user, return False
+        #if the watchlist is empty for this user, return error message
         if (not existing_user):
-            return False
+            return jsonify({'error': 'watchlist does not exist'}), 409
         #get splice of watchlist with only the username items
         user_Watchlist = Watchlist.filter(username = username).all()
         return user_Watchlist
