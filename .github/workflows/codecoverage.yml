@@ -24,6 +24,7 @@ jobs:
           pip install -U flask-cors
           pip install pytest
           pip install pytest-cov
+          pip install docker
 
       - name: Run tests and generate coverage
         run: |
