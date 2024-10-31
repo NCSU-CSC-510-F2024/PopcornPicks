@@ -1,13 +1,13 @@
 # # models/user.py
 from sqlalchemy import Column, Integer, String
-from flasksqlalchemy import SQLAlchemy
-from flask import currentapp as app
+from flask_sqlalchemy import SQLAlchemy
+
 
 
 db=SQLAlchemy()
 
 class User(db.Model):
-    tablename = 'users'
+    __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String(80), unique=True, nullable=False)
@@ -17,7 +17,7 @@ class User(db.Model):
         return f"<User {self.username}>"
 
 class Watchlist(db.Model):
-    __tablename = 'watchlists'
+    __tablename__ = 'watchlists'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id=db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)

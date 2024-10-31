@@ -7,8 +7,10 @@ This code is licensed under MIT license (see LICENSE for details)
 
 import json
 import sys
+import pandas as pd
 sys.path.append("/app/")
 import os
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 import jwt
 from functools import wraps
 from datetime import datetime, timedelta
@@ -32,7 +34,16 @@ app.config['SECRET_KEY']=os.getenv('APP_SECRET_KEY')
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
+@app.route("/")
+def landing_page():
+    """
+    Renders the landing page.
+    """
+    return render_template("landing_page.html")
 
+@app.route("/search_page")
+def search_page():
+    return render_template("search_page.html")
 
 @app.route("/login",methods=['POST'])
 def login_user():
@@ -58,7 +69,7 @@ def login_user():
         )
         # Return the token in the response
         return jsonify({'token': token}), 200
-
+    
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -109,7 +120,7 @@ def get_user_id(f):
             # Decode and verify the JWT
             decoded = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
             print(f"{decoded}")  # Contains the payload (e.g., user_id, exp, etc.)
-            request.userId=decoded['user_id']
+            request.userID=decoded['user_id']
         except jwt.ExpiredSignatureError:
             print(f"Token expired")
             return jsonify({'error': 'Token has expired'}), 401
@@ -126,87 +137,77 @@ def get_user_id(f):
 @app.route("/testToken",methods=['POST'])
 @get_user_id
 def test_decoding():
-    return jsonify({'user':request.userId}), 201
+    return jsonify({'user':request.userID}), 201
 
 
-@app.route("/")
-def landing_page():
-    """
-    Renders the landing page.
-    """
-    return render_template("landing_page.html")
-
-
-@app.route("/search_page")
-def search_page():
-    """
-    Renders the search page.
-    """
-    return render_template("search_page.html")
 
 
 @app.route("/getWatchlist", methods = ['GET'])
 @get_user_id
 def get_watchlist():
-    """
-    Retrieves watchlist for user
-    """
     try:
-        data = request.get_json()
-        username = data.get('username')
-        existing_user = Watchlist.query.filter_by(username=username).first()
+      
+        watchlist = Watchlist.query.filter_by(user_id=request.userID).all()
         #if the watchlist is empty for this user, return error message
-        if (not existing_user):
-            return jsonify({'error': 'watchlist does not exist'}), 409
+        if len(watchlist) == 0:
+            return jsonify({'watchlist': []}), 201
         #get splice of watchlist with only the username items
-        user_Watchlist = Watchlist.filter(username = username).all()
-        return user_Watchlist
-    except:
-        return("error fetching watchlist")
+        else: 
+            movies_csv_path = os.path.join(PROJECT_ROOT, "data", "movies.csv")
+            movies_data = pd.read_csv(movies_csv_path)
+            modified_watchlist=[]
+            for movie in watchlist:
+                title_series=movies_data.loc[movies_data['imdb_id']==movie.imdb_id,'title']
+                movie_title=title_series.iloc[0]
+                movie.title=movie_title
+                modified_watchlist.append({
+                    "title":movie.title,
+                    "imdbID":movie.imdb_id
+                })
+
+            return jsonify({"watchlist":modified_watchlist})
+    except Exception as e:
+        return jsonify({"error":f"error fetching movies{e}"})
+
 
 @app.route("/addtoWatchlist", methods = ['POST'])
+@get_user_id
 def add_to_watchlist():
-    """
-    Adds items to watchlist
-    """
-    try:
+    try: 
         data = request.get_json()
-        username = data.get('username')
         imdbID = data.get('imdbID')
-        existing_entry = Watchlist.query.filter_by(username=username, imdbID = imdbID).first()
+        existing_entry = Watchlist.query.filter_by(user_id=request.userID, imdb_id = imdbID).first()
         #if the watchlist already contains the movie for this user, return an error message
-        if(existing_entry):
-            return jsonify({'error': 'Item already in watchlist'}), 409
-        
+        if existing_entry is not None:
+            return jsonify({'Error': 'Item already in watchlist'}), 409
         #If not, create a new entry and add it to the session
-        new_entry = Watchlist(username=username, imdbID = imdbID)
+        new_entry = Watchlist(user_id=request.userID, imdb_id = imdbID)
         db.session.add(new_entry)
         db.session.commit()
-        return jsonify({'message': 'Watchlist entry created successfully', 'Whose watchlist was added': new_entry.username}), 201
-    except:
-        return("error adding to watchlist")
+        return jsonify({'addedToWatchlist':True, 'message': 'Watchlist entry created successfully', 'Whose watchlist was added': request.userID}), 201
+
+    except Exception as e:
+        return jsonify({"error": f"error adding to watchlist {e}"})
     
 
-@app.route("/deleteFromWatchlist", methods = ['POST'])
+@app.route("/deleteFromWatchlist", methods = ['DELETE'])
+@get_user_id
 def delete_from_watchlist():
     """
     deletes items from watchlist
     """
     try:
         data = request.get_json()
-        username = data.get('username')
-        #movie = data.get('movie')
         imdbID = data.get('imdbID')
-        existing_entry = Watchlist.query.filter_by(username=username, imdbID = imdbID).first()
+        existing_entry = Watchlist.query.filter_by(user_id=request.userID, imdb_id = imdbID).first()
         #If the item to be deleted is not in the watchlist, raise an error message
-        if(not existing_entry):
+        if existing_entry is None:
             return jsonify({'error': 'Item not already in watchlist'}), 409
-        #Otherwise delete item from the session
-        #Watchlist.delete.where(username = username, imdbID = imdbID)
         db.session.delete(existing_entry)
-        return jsonify({'message': 'Watchlist entry deleted successfully', 'Whose watchlist I deleted': existing_entry.username}), 201
-    except:
-        return("error deleting from watchlist")
+        db.session.commit()
+        return jsonify({'deletedFromWatchlist':True,'message': 'Watchlist entry deleted successfully', 'Whose watchlist I deleted': existing_entry.user_id}), 201
+    except Exception as e:
+        return jsonify({"error": f"error deleting from watchlist {e}"})
 
 
 @app.route("/predict", methods=["POST"])
@@ -226,11 +227,11 @@ def predict():
     recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
     isInWatchList=[]
     for imdb in imdb_id:
-        existing_watchlist_movie=Watchlist.query.filter_by(user_id=request.userId,imdb_id=imdb)
+        existing_watchlist_movie=Watchlist.query.filter_by(user_id=request.userID,imdb_id=imdb)
         if existing_watchlist_movie is not None:
-            isInWatchList.append(True)
-        else:
             isInWatchList.append(False)
+        else:
+            isInWatchList.append(True)
 
     resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id, "Watchlist_status": isInWatchList}
     return resp
@@ -293,3 +294,7 @@ if __name__ == "__main__":
 
 
     
+
+
+
+
