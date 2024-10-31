@@ -16,7 +16,7 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 load_dotenv()
 from werkzeug.security import generate_password_hash,check_password_hash
-from src.models.user_models import db, User
+from src.models.user_models import db, User, Watchlist
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from search import Search
@@ -145,6 +145,71 @@ def search_page():
     return render_template("search_page.html")
 
 
+@app.route("/getWatchlist", methods = ['GET'])
+@get_user_id
+def get_watchlist():
+    """
+    Retrieves watchlist for user
+    """
+    try:
+        data = request.get_json()
+        username = data.get('username')
+        existing_user = Watchlist.query.filter_by(username=username).first()
+        #if the watchlist is empty for this user, return error message
+        if (not existing_user):
+            return jsonify({'error': 'watchlist does not exist'}), 409
+        #get splice of watchlist with only the username items
+        user_Watchlist = Watchlist.filter(username = username).all()
+        return user_Watchlist
+    except:
+        return("error fetching watchlist")
+
+@app.route("/addtoWatchlist", methods = ['POST'])
+def add_to_watchlist():
+    """
+    Adds items to watchlist
+    """
+    try:
+        data = request.get_json()
+        username = data.get('username')
+        movie = data.get('movie')
+        imdbID = data.get('imdbID')
+        existing_entry = Watchlist.query.filter_by(username=username, imdbID = imdbID).first()
+        #if the watchlist already contains the movie for this user, return an error message
+        if(existing_entry):
+            return jsonify({'error': 'Item already in watchlist'}), 409
+        
+        #If not, create a new entry and add it to the session
+        new_entry = Watchlist(username=username, movie = movie, imdbID = imdbID)
+        db.session.add(new_entry)
+        db.session.commit()
+        return jsonify({'message': 'Watchlist entry created successfully', 'movie_added': new_entry.movie}), 201
+    except:
+        return("error adding to watchlist")
+    
+
+@app.route("/deleteFromWatchlist", methods = ['POST'])
+def delete_from_watchlist():
+    """
+    deletes items from watchlist
+    """
+    try:
+        data = request.get_json()
+        username = data.get('username')
+        movie = data.get('movie')
+        imdbID = data.get('imdbID')
+        existing_entry = Watchlist.query.filter_by(username=username, imdbID = imdbID).first()
+        #If the item to be deleted is not in the watchlist, raise an error message
+        if(not existing_entry):
+            return jsonify({'error': 'Item not already in watchlist'}), 409
+        #Otherwise delete item from the session
+        #Watchlist.delete.where(username = username, imdbID = imdbID)
+        db.session.delete(existing_entry)
+        return jsonify({'message': 'Watchlist entry deleted successfully', 'movie_deleted': existing_entry.movie}), 201
+    except:
+        return("error deleting from watchlist")
+
+
 @app.route("/predict", methods=["POST"])
 def predict():
     """
@@ -159,6 +224,25 @@ def predict():
             training_data.append(movie_with_rating)
     recommendations, genres, imdb_id = recommend_for_new_user(training_data)
     recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
+
+    inWatchlist = []
+    watchlist = get_watchlist()
+
+
+    #iterate through the list of imdb_ids and check
+    #if they are present in the watchlist
+
+    # if(watchlist):
+    #     for id in imdb_id:
+    #         if(watchlist.query.filter_by(imdbID = imdb_id).first()):
+    #             inWatchlist.append(True)
+    #         else:
+    #             inWatchlist.append(False)
+    # else:
+    #     for id in imdb_id:
+    #         inWatchlist.append(False)
+
+    # resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id, "Watchlist_status": inWatchlist}
     resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id}
     return resp
 
