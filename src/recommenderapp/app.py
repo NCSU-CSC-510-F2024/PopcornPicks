@@ -1,5 +1,5 @@
 """
-Copyright (c) 2023 Aditya Pai, Ananya Mantravadi, Rishi Singhal, Samarth Shetty
+Copyright (c) 2024 Jonas Trepanier, Anirudh Kaluri, Siddhi Mule
 This code is licensed under MIT license (see LICENSE for details)
 
 @author: PopcornPicks
@@ -31,10 +31,7 @@ load_dotenv()
 app = Flask(__name__)
 # format for the value in below key-value pair is
 # postgresql://username:password@host:port/database_name
-app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{
-    os.getenv('POSTGRES_USER')}:{
-        os.getenv('POSTGRES_PW')}@postgres:5432/{
-            os.getenv('POSTGRES_DB')}"
+app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PW')}@postgres:5432/{os.getenv('POSTGRES_DB')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.getenv('APP_SECRET_KEY')
 
