@@ -93,7 +93,7 @@ PopcornPicks is a user-friendly movie recommender that curates a tailored list o
 <img src="https://github.com/CSCI510testerhw1/PopcornPicks/blob/master/asset/Generate_Watchlist2.png" width="600" height="375">
 
 ### Watchlist
-**If you click the "Watchlist" tab in the header, you are taken to this page and shown what movies you've saved to your watchlist.**
+**If you click the "Watchlist" tab in the header, you are taken to this page and shown what movies you've saved to your watchlist**
 <img src="https://github.com/CSCI510testerhw1/PopcornPicks/blob/master/asset/Watchlist.png" width="600" height="375">
 
 ## Tech stack Used👨‍💻:
@@ -133,8 +133,8 @@ PopcornPicks is a user-friendly movie recommender that curates a tailored list o
    Follow the setup instructions in the wiki documentation
    
     https://github.com/CSCI510testerhw1/PopcornPicks/wiki/Installation
-
-    Or visit [INSTALL.md](https://github.com/CSCI510testerhw1/PopcornPicks/blob/master/INSTALL.md)
+    
+  Or visit [INSTALL.md](https://github.com/CSCI510testerhw1/PopcornPicks/blob/master/INSTALL.md)
     
     
 <b>Finally, start enjoying personalized movie recommendations!</b>
