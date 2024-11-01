@@ -4,7 +4,9 @@ This code is licensed under MIT license (see LICENSE for details)
 
 @author: PopcornPicks
 """
-
+# pylint: disable=locally-disabled, multiple-statements, fixme, line-too-long
+# pylint: disable=locally-disabled, multiple-statements, fixme, wrong-import-order
+# pylint: disable=locally-disabled, multiple-statements, fixme, wrong-import-position
 import json
 import sys
 import pandas as pd
