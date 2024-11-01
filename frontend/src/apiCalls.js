@@ -32,14 +32,43 @@ export const createUser = async (username, password) => {
 };
 
 export const searchMovies = async (term) => {
-  const response = await api.post('/search', { q: term });
-  return response.data;
+  const formData = new FormData();
+  formData.append('q', term);
+
+  try {
+    const response = await axios.post(`${API_BASE_URL}/search`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error in searchMovies:', error);
+    throw error;
+  }
 };
 
 export const predictMovies = async (movieList) => {
   const response = await api.post('/predict', { movie_list: movieList });
   return response.data;
 };
+
+//watchlist new feature
+export const addToWatchlist = async (imdbID) => {
+  const response = await api.post('/addtoWatchlist', { imdbID });
+  return response.data;
+};
+
+export const getWatchlist = async () => {
+  const response = await api.get('/getWatchlist');
+  return response.data;
+};
+
+export const deleteFromWatchlist = async (imdbID) => {
+  const response = await api.delete('/deleteFromWatchlist', { data: { imdbID } });
+  return response.data;
+};
+
 
 export const submitFeedback = async (feedbackData) => {
   const response = await api.post('/feedback', feedbackData);

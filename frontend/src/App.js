@@ -1,17 +1,19 @@
 // Import the component for your landing page
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './stylesheet.css'; //custom CSS file
 
-import { Route, BrowserRouter as Router, Routes, Navigate } from 'react-router-dom';
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+
 import { AuthProvider } from './AuthContext';
 import LandingPage from './components/LandingPage';
 import Login from './components/login';
+import Navbar from './components/NavBar';
+import ProtectedRoute from './components/ProtectedRoute';
 import React from 'react';
 import Register from './components/Register';
 import SearchMovies from './components/SearchMovies';
-import Success from './components/Success';
-import Navbar from './components/NavBar';
-import ProtectedRoute from './components/ProtectedRoute';
+import Watchlist from './components/Watchlist';
 
 function App() {
   return (
@@ -37,6 +39,12 @@ function App() {
           <Route path="/search_page" element={
             <ProtectedRoute authRequired={true}>
               <SearchMovies />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/watchlist" element={
+            <ProtectedRoute authRequired={true}>
+              <Watchlist />
             </ProtectedRoute>
           } />
           {/* Catch-all route */}

@@ -1,35 +1,62 @@
+import '../RecommendedMovies.css';
+
+import { Badge, Button, Card, Col, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
+
 import React from 'react';
 
-const RecommendedMovies = ({ movies }) => {
+const RecommendedMovies = ({ movies, genres, imdbIds, watchlistStatus, onWatchlistToggle }) => {
+  if (movies.length === 0) {
+    return null;
+  }
+
   return (
-    <ul id="predictedMovies" className="list-group">
-      {movies.map((movie, index) => (
-        <li key={index} className="list-group-item">
-          {movie}
-          <div className="mt-2">
-            <table className='table predictTable'>
-              <tr>
-                <td className='radio-inline'>
-                  <section id="pattern1">
-                    <label style={{"--icon": "'😍'"}}><input type="radio" name={index} value='3' data-toggle="tooltip" data-placement="top" title="LIKE" /></label><br />
-                  </section>
-                </td>
-                <td className='radio-inline'>
-                  <section id="pattern1">
-                    <label style={{"--icon": "'😐'"}}><input type="radio" name={index} value='2' data-toggle="tooltip" data-placement="top" title="YET TO WATCH" /></label><br />
-                  </section>
-                </td>
-                <td className='radio-inline'>
-                  <section id="pattern1">
-                    <label style={{"--icon": "'😤'"}}><input type="radio" name={index} value='1' data-toggle="tooltip" data-placement="top" title="DISLIKE" /></label><br />
-                  </section>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <div className="recommended-movies">
+      <h2 className="mb-4">Recommended Movies</h2>
+      <Row xs={1} md={2} lg={3} className="g-4">
+        {movies.map((movie, index) => (
+          <Col key={index}>
+            <Card className="h-100 movie-card">
+              <Card.Body>
+                <Card.Title className="movie-title">{movie}</Card.Title>
+                <div className="genre-container">
+                  {genres[index].split(', ').map((genre, genreIndex) => (
+                    <OverlayTrigger
+                      key={genreIndex}
+                      placement="top"
+                      overlay={<Tooltip id={`tooltip-${index}-${genreIndex}`}>{genre}</Tooltip>}
+                    >
+                      <Badge bg="secondary" className="me-1 mb-1">{genre.substring(0, 3)}</Badge>
+                    </OverlayTrigger>
+                  ))}
+                </div>
+                <a 
+                  href={`https://www.imdb.com/title/${imdbIds[index]}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="imdb-link"
+                >
+                  IMDb 🔗
+                </a>
+              </Card.Body>
+              <Card.Footer>
+                {!watchlistStatus[index] ? (
+                  <Button 
+                    variant="outline-success"
+                    size="sm"
+                    onClick={() => onWatchlistToggle(imdbIds[index], false, index)}
+                    className="w-100"
+                  >
+                    Add to Watchlist
+                  </Button>
+                ) : (
+                  <Badge bg="success" className="w-100 py-2">Added to Watchlist</Badge>
+                )}
+              </Card.Footer>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </div>
   );
 };
 
