@@ -7,6 +7,10 @@ This code is licensed under MIT license (see LICENSE for details)
 # pylint: disable=locally-disabled, multiple-statements, fixme, line-too-long
 # pylint: disable=locally-disabled, multiple-statements, fixme, wrong-import-order
 # pylint: disable=locally-disabled, multiple-statements, fixme, wrong-import-position
+# pylint: disable=locally-disabled, multiple-statements, fixme, broad-exception-caught
+# pylint: disable=locally-disabled, multiple-statements, fixme, invalid-name
+# pylint: disable=locally-disabled, multiple-statements, fixme, f-string-without-interpolation
+
 import json
 import sys
 import pandas as pd
@@ -16,16 +20,16 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..
 import jwt
 from functools import wraps
 from datetime import datetime, timedelta
-from flask_sqlalchemy import SQLAlchemy
+#from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 load_dotenv()
 from werkzeug.security import generate_password_hash,check_password_hash
 from src.models.user_models import db, User, Watchlist
+from src.prediction_scripts.item_based import recommend_for_new_user
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from search import Search
 from utils import beautify_feedback_data, send_email_to_user
-from src.prediction_scripts.item_based import recommend_for_new_user
 app= Flask(__name__)
 #format for the value in below key-value pair is postgresql://username:password@host:port/database_name
 app.config['SQLALCHEMY_DATABASE_URI']= f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PW')}@postgres:5432/{os.getenv('POSTGRES_DB')}"
@@ -45,10 +49,17 @@ def landing_page():
 
 @app.route("/search_page")
 def search_page():
+    '''
+    Returns the search page
+    '''
     return render_template("search_page.html")
 
 @app.route("/login",methods=['POST'])
 def login_user():
+    '''
+    Retrieves username and password from service
+    And generates login token if they are an existing account
+    '''
     try:
         # Get JSON data from the request
         data = request.get_json()
@@ -77,7 +88,10 @@ def login_user():
 
 @app.route("/createUser",methods=['POST'])
 def create_user():
-    request_obj=request.data
+    '''
+    Adds username and password to USER
+    '''
+    #request_obj=request.data
     try:
         # Get JSON data from the request
         data = request.get_json()
@@ -105,6 +119,9 @@ def create_user():
 
 #send the request to this function
 def get_user_id(f):
+    '''
+    Retrieves user-id
+    '''
     @wraps(f)
     def decode_token(*args,**kwargs):
         #Extract token from the Authorization header
@@ -139,6 +156,9 @@ def get_user_id(f):
 @app.route("/testToken",methods=['POST'])
 @get_user_id
 def test_decoding():
+    '''
+    Returns user.id from request
+    '''
     return jsonify({'user':request.userID}), 201
 
 
@@ -147,6 +167,9 @@ def test_decoding():
 @app.route("/getWatchlist", methods = ['GET'])
 @get_user_id
 def get_watchlist():
+    '''
+    Returns the current user's watchlist
+    '''
     try:
 
         watchlist = Watchlist.query.filter_by(user_id=request.userID).all()
@@ -175,6 +198,9 @@ def get_watchlist():
 @app.route("/addtoWatchlist", methods = ['POST'])
 @get_user_id
 def add_to_watchlist():
+    '''
+    Adds selected movie to the user's watchlist
+    '''
     try:
         data = request.get_json()
         imdbID = data.get('imdbID')
