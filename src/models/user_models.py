@@ -1,12 +1,21 @@
+"""
+Copyright (c) 2024 Jonas Trepanier, Anirudh Kaluri, Siddhi Mule
+This code is licensed under MIT license (see LICENSE for details)
+
+@author: PopcornPicks
+"""
 # # models/user.py
-from sqlalchemy import Column, Integer, String
-from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, Integer, String # type: ignore
+from flask_sqlalchemy import SQLAlchemy # type: ignore
 
 
 
 db=SQLAlchemy()
 
-class User(db.Model):
+class User(db.Model): # pylint: disable=too-few-public-methods
+    '''
+    Class to hold user data.
+    '''
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -14,9 +23,15 @@ class User(db.Model):
     password = Column(String(300),nullable=False)
 
     def repr(self):
+        '''
+        returns the input username
+        '''
         return f"<User {self.username}>"
 
-class Watchlist(db.Model):
+class Watchlist(db.Model): # pylint: disable=too-few-public-methods
+    '''
+    Class to hold watchlist data
+    '''
     __tablename__ = 'watchlists'
 
     id = Column(Integer, primary_key=True, autoincrement=True)

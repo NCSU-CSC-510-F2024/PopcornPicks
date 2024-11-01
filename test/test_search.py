@@ -1,10 +1,8 @@
 """
-Copyright (c) 2023 Aditya Pai, Ananya Mantravadi, Rishi Singhal, Samarth Shetty
+Copyright (c) 2024 Jonas Trepanier, Anirudh Kaluri, Siddhi Mule
 This code is licensed under MIT license (see LICENSE for details)
 
 @author: PopcornPicks
-
-Test suit for search feature
 """
 
 import sys
