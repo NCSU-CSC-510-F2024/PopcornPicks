@@ -94,6 +94,7 @@ PopcornPicks is a user-friendly movie recommender that curates a tailored list o
 
 ### Watchlist
 **If you click the "Watchlist" tab in the header, you are taken to this page and shown what movies you've saved to your watchlist**
+
 <img src="https://github.com/CSCI510testerhw1/PopcornPicks/blob/master/asset/Watchlist.png" width="600" height="375">
 
 ## Tech stack Used👨‍💻:
