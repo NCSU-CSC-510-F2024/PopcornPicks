@@ -16,6 +16,8 @@ psycopg2-binary="*"
 python-dotenv = "*"
 werkzeug = "*"
 pyjwt = "*"
+pytest-mock = "*"
+flask-bcrypt = "*"
 
 [dev-packages]
 
