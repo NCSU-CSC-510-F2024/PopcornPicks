@@ -40,7 +40,7 @@
 
 ## Why use PopcornPicks?
 
-<video src="https://github.com/CSCI510testerhw1/PopcornPicks/blob/jonas-dev/asset/Animated Project 2 demo.mp4" width="320" height="240" controls></video>
+<video src="https://github.com/CSCI510testerhw1/PopcornPicks/blob/jonas-dev/asset/Animated%20Project%202%20demo.mp4" width="320" height="240" controls></video>
 
 PopcornPicks: Your movie recommender! Input movies, get tailored suggestions, and share via email. Elevate your movie choices effortlessly!
 
