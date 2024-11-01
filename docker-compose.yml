@@ -1,4 +1,17 @@
 services:
+ frontend:
+  build:
+    context: ./frontend
+  volumes:
+    - ./frontend:/app
+    - /app/node_modules
+  ports:
+    - "3000:3000"
+  working_dir: /app
+  command: npm start
+  networks:
+   - app_network
+ 
  web:
   build: .
   volumes:
@@ -9,6 +22,8 @@ services:
    postgres:
     condition: service_healthy
   command: python /app/src/recommenderapp/app.py
+  networks:
+   - app_network
 
  postgres:
   image: postgres:latest
@@ -23,6 +38,8 @@ services:
    interval: 10s
    timeout: 5s
    retries: 5
+  networks:
+      - app_network
 
  pgadmin:
   container_name: pgadmin
@@ -32,3 +49,10 @@ services:
    - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW}
   ports:
    - "5050:80"
+  networks:
+      - app_network
+
+networks:
+ app_network:
+  name: app_network
+  driver: bridge
