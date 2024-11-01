@@ -177,18 +177,17 @@ def get_watchlist():
         if len(watchlist) == 0:
             return jsonify({'watchlist': []}), 201
         #get splice of watchlist with only the username items
-        else:
-            movies_csv_path = os.path.join(PROJECT_ROOT, "data", "movies.csv")
-            movies_data = pd.read_csv(movies_csv_path)
-            modified_watchlist=[]
-            for movie in watchlist:
-                title_series=movies_data.loc[movies_data['imdb_id']==movie.imdb_id,'title']
-                movie_title=title_series.iloc[0]
-                movie.title=movie_title
-                modified_watchlist.append({
-                    "title":movie.title,
-                    "imdbID":movie.imdb_id
-                })
+        movies_csv_path = os.path.join(PROJECT_ROOT, "data", "movies.csv")
+        movies_data = pd.read_csv(movies_csv_path)
+        modified_watchlist=[]
+        for movie in watchlist:
+            title_series=movies_data.loc[movies_data['imdb_id']==movie.imdb_id,'title']
+            movie_title=title_series.iloc[0]
+            movie.title=movie_title
+            modified_watchlist.append({
+                "title":movie.title,
+                "imdbID":movie.imdb_id
+            })
 
             return jsonify({"watchlist":modified_watchlist})
     except Exception as e:
