@@ -28,8 +28,8 @@ from src.models.user_models import db, User, Watchlist
 from src.prediction_scripts.item_based import recommend_for_new_user
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
-from search import Search
-from utils import beautify_feedback_data, send_email_to_user
+from src.recommenderapp.search import Search
+from src.recommenderapp.utils import beautify_feedback_data, send_email_to_user
 app= Flask(__name__)
 #format for the value in below key-value pair is postgresql://username:password@host:port/database_name
 app.config['SQLALCHEMY_DATABASE_URI']= f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PW')}@postgres:5432/{os.getenv('POSTGRES_DB')}"
