@@ -5,39 +5,34 @@ This code is licensed under MIT license (see LICENSE for details)
 @author: PopcornPicks
 """
 
-from werkzeug.security import generate_password_hash, check_password_hash
-from src.prediction_scripts.item_based import recommend_for_new_user
-from utils import beautify_feedback_data, send_email_to_user
-from search import Search
-from flask_cors import CORS
-from flask import Flask, jsonify, render_template, request
-from src.models.user_models import db, User, Watchlist
-from dotenv import load_dotenv
-from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime, timedelta
-from functools import wraps
-import jwt
-import os
 import json
 import sys
 import pandas as pd
 sys.path.append("/app/")
-PROJECT_ROOT = os.path.abspath(
-    os.path.join(
-        os.path.dirname(__file__),
-        "..",
-        ".."))
+import os
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+import jwt
+from functools import wraps
+from datetime import datetime, timedelta
+from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
 load_dotenv()
-app = Flask(__name__)
-# format for the value in below key-value pair is
-# postgresql://username:password@host:port/database_name
-app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PW')}@postgres:5432/{os.getenv('POSTGRES_DB')}"
+from werkzeug.security import generate_password_hash,check_password_hash
+from src.models.user_models import db, User, Watchlist
+from flask import Flask, jsonify, render_template, request
+from flask_cors import CORS
+from search import Search
+from utils import beautify_feedback_data, send_email_to_user
+from src.prediction_scripts.item_based import recommend_for_new_user 
+app= Flask(__name__)
+#format for the value in below key-value pair is postgresql://username:password@host:port/database_name
+app.config['SQLALCHEMY_DATABASE_URI']= f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PW')}@postgres:5432/{os.getenv('POSTGRES_DB')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = os.getenv('APP_SECRET_KEY')
+app.config['SECRET_KEY']=os.getenv('APP_SECRET_KEY')
+
 
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
-
 
 @app.route("/")
 def landing_page():
@@ -46,13 +41,11 @@ def landing_page():
     """
     return render_template("landing_page.html")
 
-
 @app.route("/search_page")
 def search_page():
     return render_template("search_page.html")
 
-
-@app.route("/login", methods=['POST'])
+@app.route("/login",methods=['POST'])
 def login_user():
     try:
         # Get JSON data from the request
@@ -76,13 +69,13 @@ def login_user():
         )
         # Return the token in the response
         return jsonify({'token': token}), 200
+    
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
-@app.route("/createUser", methods=['POST'])
+@app.route("/createUser",methods=['POST'])
 def create_user():
-    request_obj = request.data
+    request_obj=request.data
     try:
         # Get JSON data from the request
         data = request.get_json()
@@ -100,22 +93,23 @@ def create_user():
         new_user = User(username=username, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
-        return jsonify({'message': 'User created successfully',
-                       'user': new_user.username}), 201
+        return jsonify({'message': 'User created successfully', 'user': new_user.username}), 201
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 
-# send the request to this function
+
+    
+#send the request to this function
 def get_user_id(f):
     @wraps(f)
-    def decode_token(*args, **kwargs):
-        # Extract token from the Authorization header
+    def decode_token(*args,**kwargs):
+        #Extract token from the Authorization header
         auth_header = request.headers.get('Authorization')
         if not auth_header:
             return jsonify({'error': 'Authorization header missing'}), 401
-
+        
         # The format should be "Bearer <token>"
         try:
             token = auth_header.split(" ")[1]  # Extract the token part
@@ -124,13 +118,9 @@ def get_user_id(f):
 
         try:
             # Decode and verify the JWT
-            decoded = jwt.decode(
-                token,
-                app.config['SECRET_KEY'],
-                algorithms=['HS256'])
-            # Contains the payload (e.g., user_id, exp, etc.)
-            print(f"{decoded}")
-            request.userID = decoded['user_id']
+            decoded = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+            print(f"{decoded}")  # Contains the payload (e.g., user_id, exp, etc.)
+            request.userID=decoded['user_id']
         except jwt.ExpiredSignatureError:
             print(f"Token expired")
             return jsonify({'error': 'Token has expired'}), 401
@@ -138,71 +128,69 @@ def get_user_id(f):
             print(f"Invalid token")
             return jsonify({'error': 'Invalid token'}), 401
         except Exception as e:
-            return jsonify({'error': f'Server side issue {e}'}), 401
-        return f(*args, **kwargs)
-    # decode_token.__name__=f.__name__
+            return jsonify({'error':f'Server side issue {e}'}), 401
+        return f(*args,**kwargs)
+    #decode_token.__name__=f.__name__
     return decode_token
+        
 
-
-@app.route("/testToken", methods=['POST'])
+@app.route("/testToken",methods=['POST'])
 @get_user_id
 def test_decoding():
-    return jsonify({'user': request.userID}), 201
+    return jsonify({'user':request.userID}), 201
 
 
-@app.route("/getWatchlist", methods=['GET'])
+
+
+@app.route("/getWatchlist", methods = ['GET'])
 @get_user_id
 def get_watchlist():
     try:
-
+      
         watchlist = Watchlist.query.filter_by(user_id=request.userID).all()
-        # if the watchlist is empty for this user, return error message
+        #if the watchlist is empty for this user, return error message
         if len(watchlist) == 0:
             return jsonify({'watchlist': []}), 201
-        # get splice of watchlist with only the username items
-        else:
+        #get splice of watchlist with only the username items
+        else: 
             movies_csv_path = os.path.join(PROJECT_ROOT, "data", "movies.csv")
             movies_data = pd.read_csv(movies_csv_path)
-            modified_watchlist = []
+            modified_watchlist=[]
             for movie in watchlist:
-                title_series = movies_data.loc[movies_data['imdb_id']
-                                               == movie.imdb_id, 'title']
-                movie_title = title_series.iloc[0]
-                movie.title = movie_title
+                title_series=movies_data.loc[movies_data['imdb_id']==movie.imdb_id,'title']
+                movie_title=title_series.iloc[0]
+                movie.title=movie_title
                 modified_watchlist.append({
-                    "title": movie.title,
-                    "imdbID": movie.imdb_id
+                    "title":movie.title,
+                    "imdbID":movie.imdb_id
                 })
 
-            return jsonify({"watchlist": modified_watchlist})
+            return jsonify({"watchlist":modified_watchlist})
     except Exception as e:
-        return jsonify({"error": f"error fetching movies{e}"})
+        return jsonify({"error":f"error fetching movies{e}"})
 
 
-@app.route("/addtoWatchlist", methods=['POST'])
+@app.route("/addtoWatchlist", methods = ['POST'])
 @get_user_id
 def add_to_watchlist():
-    try:
+    try: 
         data = request.get_json()
         imdbID = data.get('imdbID')
-        existing_entry = Watchlist.query.filter_by(
-            user_id=request.userID, imdb_id=imdbID).first()
-        # if the watchlist already contains the movie for this user, return an
-        # error message
+        existing_entry = Watchlist.query.filter_by(user_id=request.userID, imdb_id = imdbID).first()
+        #if the watchlist already contains the movie for this user, return an error message
         if existing_entry is not None:
             return jsonify({'Error': 'Item already in watchlist'}), 409
-        # If not, create a new entry and add it to the session
-        new_entry = Watchlist(user_id=request.userID, imdb_id=imdbID)
+        #If not, create a new entry and add it to the session
+        new_entry = Watchlist(user_id=request.userID, imdb_id = imdbID)
         db.session.add(new_entry)
         db.session.commit()
-        return jsonify({'addedToWatchlist': True, 'message': 'Watchlist entry created successfully',
-                       'Whose watchlist was added': request.userID}), 201
+        return jsonify({'addedToWatchlist':True, 'message': 'Watchlist entry created successfully', 'Whose watchlist was added': request.userID}), 201
 
     except Exception as e:
         return jsonify({"error": f"error adding to watchlist {e}"})
+    
 
-
-@app.route("/deleteFromWatchlist", methods=['DELETE'])
+@app.route("/deleteFromWatchlist", methods = ['DELETE'])
 @get_user_id
 def delete_from_watchlist():
     """
@@ -211,16 +199,13 @@ def delete_from_watchlist():
     try:
         data = request.get_json()
         imdbID = data.get('imdbID')
-        existing_entry = Watchlist.query.filter_by(
-            user_id=request.userID, imdb_id=imdbID).first()
-        # If the item to be deleted is not in the watchlist, raise an error
-        # message
+        existing_entry = Watchlist.query.filter_by(user_id=request.userID, imdb_id = imdbID).first()
+        #If the item to be deleted is not in the watchlist, raise an error message
         if existing_entry is None:
             return jsonify({'error': 'Item not already in watchlist'}), 409
         db.session.delete(existing_entry)
         db.session.commit()
-        return jsonify({'deletedFromWatchlist': True, 'message': 'Watchlist entry deleted successfully',
-                       'Whose watchlist I deleted': existing_entry.user_id}), 201
+        return jsonify({'deletedFromWatchlist':True,'message': 'Watchlist entry deleted successfully', 'Whose watchlist I deleted': existing_entry.user_id}), 201
     except Exception as e:
         return jsonify({"error": f"error deleting from watchlist {e}"})
 
@@ -240,17 +225,15 @@ def predict():
             training_data.append(movie_with_rating)
     recommendations, genres, imdb_id = recommend_for_new_user(training_data)
     recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
-    isInWatchList = []
+    isInWatchList=[]
     for imdb in imdb_id:
-        existing_watchlist_movie = Watchlist.query.filter_by(
-            user_id=request.userID, imdb_id=imdb).first()
+        existing_watchlist_movie=Watchlist.query.filter_by(user_id=request.userID,imdb_id=imdb).first()
         if existing_watchlist_movie is not None:
             isInWatchList.append(True)
         else:
             isInWatchList.append(False)
 
-    resp = {"recommendations": recommendations, "genres": genres,
-            "imdb_id": imdb_id, "Watchlist_status": isInWatchList}
+    resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id, "Watchlist_status": isInWatchList}
     return resp
 
 
@@ -302,6 +285,6 @@ if __name__ == "__main__":
             db.init_app(app)
             db.create_all()
             print(f"Tables created successfully")
-            app.run(host="0.0.0.0", port=5000, debug=True)
+            app.run(host="0.0.0.0",port=5000,debug=True)
     except Exception as e:
         print(f"Error creating database tables:{e}")
