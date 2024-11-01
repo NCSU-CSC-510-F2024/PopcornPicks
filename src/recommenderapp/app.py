@@ -23,7 +23,7 @@ from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from search import Search
 from utils import beautify_feedback_data, send_email_to_user
-from src.prediction_scripts.item_based import recommend_for_new_user 
+from src.prediction_scripts.item_based import recommend_for_new_user
 app= Flask(__name__)
 #format for the value in below key-value pair is postgresql://username:password@host:port/database_name
 app.config['SQLALCHEMY_DATABASE_URI']= f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PW')}@postgres:5432/{os.getenv('POSTGRES_DB')}"
@@ -69,7 +69,7 @@ def login_user():
         )
         # Return the token in the response
         return jsonify({'token': token}), 200
-    
+
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -100,7 +100,7 @@ def create_user():
 
 
 
-    
+
 #send the request to this function
 def get_user_id(f):
     @wraps(f)
@@ -109,7 +109,7 @@ def get_user_id(f):
         auth_header = request.headers.get('Authorization')
         if not auth_header:
             return jsonify({'error': 'Authorization header missing'}), 401
-        
+
         # The format should be "Bearer <token>"
         try:
             token = auth_header.split(" ")[1]  # Extract the token part
@@ -132,7 +132,7 @@ def get_user_id(f):
         return f(*args,**kwargs)
     #decode_token.__name__=f.__name__
     return decode_token
-        
+
 
 @app.route("/testToken",methods=['POST'])
 @get_user_id
@@ -146,13 +146,13 @@ def test_decoding():
 @get_user_id
 def get_watchlist():
     try:
-      
+
         watchlist = Watchlist.query.filter_by(user_id=request.userID).all()
         #if the watchlist is empty for this user, return error message
         if len(watchlist) == 0:
             return jsonify({'watchlist': []}), 201
         #get splice of watchlist with only the username items
-        else: 
+        else:
             movies_csv_path = os.path.join(PROJECT_ROOT, "data", "movies.csv")
             movies_data = pd.read_csv(movies_csv_path)
             modified_watchlist=[]
@@ -173,7 +173,7 @@ def get_watchlist():
 @app.route("/addtoWatchlist", methods = ['POST'])
 @get_user_id
 def add_to_watchlist():
-    try: 
+    try:
         data = request.get_json()
         imdbID = data.get('imdbID')
         existing_entry = Watchlist.query.filter_by(user_id=request.userID, imdb_id = imdbID).first()
@@ -188,7 +188,7 @@ def add_to_watchlist():
 
     except Exception as e:
         return jsonify({"error": f"error adding to watchlist {e}"})
-    
+
 
 @app.route("/deleteFromWatchlist", methods = ['DELETE'])
 @get_user_id
