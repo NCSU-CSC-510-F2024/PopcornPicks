@@ -5,3 +5,5 @@ Flask-Cors
 autopep8
 pytest
 pytest-cov
+docker
+Flask-SQLAlchemy

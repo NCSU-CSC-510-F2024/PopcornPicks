@@ -40,12 +40,7 @@
 
 ## Why use PopcornPicks?
 
-<img
-  src="https://media.giphy.com/media/l1J9GIXk9w7OYsd5S/giphy.gif"
-  alt="Starship with iTerm2 and the Snazzy theme"
-  width="40%"
-  align="right"
-/>
+<video src="https://github.com/CSCI510testerhw1/PopcornPicks/blob/jonas-dev/asset/Animated Project 2 demo.mp4" width="320" height="240" controls></video>
 
 PopcornPicks: Your movie recommender! Input movies, get tailored suggestions, and share via email. Elevate your movie choices effortlessly!
 
@@ -153,7 +148,7 @@ Please refer to the [CONTRIBUTING.md](https://github.com/adipai/PopcornPicks/blo
 [Samarth Shetty](https://www.linkedin.com/in/samarthshetty09/)<br/>
 
 ## Contact
-In case of any issues, please e-mail your queries to popcornpicks504@gmail.com or raise an issue on this repository.
+In case of any issues, please e-mail your queries to popcornpicker35@gmail.com or raise an issue on this repository.
 
 ## Join the PopcornPicks Community:
 

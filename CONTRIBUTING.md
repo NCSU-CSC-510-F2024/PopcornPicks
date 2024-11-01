@@ -89,7 +89,7 @@ Any suggested enhancements like adding new features or improving existing functi
 
 ## Code of Conduct:
 
-* Please go through the [Code of Conduct](https://github.com/adipai/PopcornPicks/blob/master/CODE_OF_CONDUCT.md) before you begin contributing. This project and everyone participating in it is governed by the Code of Conduct. By participating, you are expected to uphold this code. Please report unacceptable behavior to popcornpicks504@gmail.com.
+* Please go through the [Code of Conduct](https://github.com/adipai/PopcornPicks/blob/master/CODE_OF_CONDUCT.md) before you begin contributing. This project and everyone participating in it is governed by the Code of Conduct. By participating, you are expected to uphold this code. Please report unacceptable behavior to popcornpicker35@gmail.com.
 
 ## Pull Request Submission Guidelines
 

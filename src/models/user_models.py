@@ -12,7 +12,7 @@ from flask_sqlalchemy import SQLAlchemy # type: ignore
 
 db=SQLAlchemy()
 
-class User(db.Model): # pylint: disable=too-few-public-methods  
+class User(db.Model): # pylint: disable=too-few-public-methods
     '''
     Class to hold user data.
     '''
@@ -28,7 +28,7 @@ class User(db.Model): # pylint: disable=too-few-public-methods
         '''
         return f"<User {self.username}>"
 
-class Watchlist(db.Model): # pylint: disable=too-few-public-methods  
+class Watchlist(db.Model): # pylint: disable=too-few-public-methods
     '''
     Class to hold watchlist data
     '''
