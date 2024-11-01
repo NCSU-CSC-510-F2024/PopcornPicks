@@ -18,7 +18,7 @@
 
   
 <img src="https://github.com/adipai/PopcornPicks/blob/master/asset/header_display.png" alt="drawing" style="width:1000px;"/>
-<b>PopcornPicks is more than just a movie recommender system; it's a gateway to a world of cinematic adventures. With an ever-expanding library of films and a powerful recommendation algorithm, PopcornPicks is here to transform the way you discover, enjoy, and connect with movies.</b>
+<b>PopcornPicks is more than just a movie recommender system; it's a gateway to a world of cinematic adventures. With an ever-expanding library of films and a powerful recommendation algorithm, PopcornPicks is here to transform the way you discover, enjoy, and connect with movies. Now totally personalized with new user profiles!</b>
 
 # Contents  
 
@@ -40,7 +40,7 @@
 
 ## Why use PopcornPicks?
 
-<video src="https://github.com/CSCI510testerhw1/PopcornPicks/blob/jonas-dev/asset/Animated%20Project%202%20demo.mp4" width="320" height="240" controls></video>
+Watch our video: https://youtu.be/rbT5nZ8c32o
 
 PopcornPicks: Your movie recommender! Input movies, get tailored suggestions, and share via email. Elevate your movie choices effortlessly!
 
@@ -50,15 +50,16 @@ PopcornPicks: Your movie recommender! Input movies, get tailored suggestions, an
 - **Insightful:** Get movie insights at a glance.
 - **Comprehensive:** Supports a wide array of user-preferred movies.
 - **Simple:** Easy installation and setup – start discovering great movies in no time!"
+- **Personal:** Save and curate your watchlist on your very own Popcorn Picks account!
 
 ## Documentation
 Checkout for project documentation at our [wiki page](https://github.com/adipai/PopcornPicks/wiki)
 
-## Project Presentation Video
-You can see the project presentation at - https://youtu.be/ymAo_zXfZ0c
+## Features
+For a detailed breakdown of our current features, see our video: - https://youtu.be/ymAo_zXfZ0c
 
 ## Project Description
-PopcornPicks is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, PopcornPicks offers the convenience of emailing the recommended movies, enhancing the movie-watching experience. For the system architecture and other details, please refer to our [wiki page](https://github.com/adipai/PopcornPicks/wiki)
+PopcornPicks is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, PopcornPicks offers the convenience of emailing the recommended movies, or saving them to your account watchlist, enhancing the movie-watching experience. For the system architecture and other details, please refer to our [wiki page](https://github.com/adipai/PopcornPicks/wiki)
 
 ## Core Applications of the Project
 
@@ -74,9 +75,6 @@ PopcornPicks is a user-friendly movie recommender that curates a tailored list o
     <img src="https://github.com/adipai/PopcornPicks/blob/master/asset/email_notifier.gif" alt="Email Notifier" width="600" height="375">
     <img src="https://github.com/adipai/PopcornPicks/blob/master/asset/email.png" alt="Email" width="400" height="400">
 </div>
-
-## Project 2 Delta
-Check out the significant changes that we made for Project 2 [here](https://github.com/adipai/PopcornPicks/wiki/The-Delta-(Project-2))
 
 ## Tech stack Used👨‍💻:
 
