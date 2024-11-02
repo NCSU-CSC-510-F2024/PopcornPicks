@@ -38,6 +38,7 @@ app.config['SECRET_KEY']=os.getenv('APP_SECRET_KEY')
 
 
 
+
 #cors = CORS(app, resources={r"/*": {"origins": "*"}})
 CORS(app, origins=["http://frontend:3000","http://localhost:3000"])  # Allow requests from frontend container
 
