@@ -5,7 +5,7 @@
 [![GitHub issues-closed](https://img.shields.io/github/issues-closed/CSCI510testerhw1/PopcornPicks.svg)](https://github.com/CSCI510testerhw1/PopcornPicks/issues?q=is%3Aissue+is%3Aclosed) 
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/CSCI510testerhw1/PopcornPicks) 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4127507.svg)](https://doi.org/10.5281/zenodo.10023130) 
+[![DOI](https://zenodo.org/badge/871659563.svg)](https://doi.org/10.5281/zenodo.14027582)
 [![Unittest](https://github.com/CSCI510testerhw1/PopcornPicks/actions/workflows/unittest.yml/badge.svg?branch=master&event=push)](https://github.com/CSCI510testerhw1/PopcornPicks/actions/workflows/unittest.yml) 
 [![codecov](https://codecov.io/gh/CSCI510testerhw1/PopcornPicks/graph/badge.svg?token=HUMM2BTSQO)](https://codecov.io/gh/CSCI510testerhw1/PopcornPicks)
 [![GitHub release](https://img.shields.io/github/release/CSCI510testerhw1/PopcornPicks.svg)](https://GitHub.com/CSCI510testerhw1/PopcornPicksreleases/) 
