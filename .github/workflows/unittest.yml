@@ -30,7 +30,7 @@ jobs:
         pip install pyjwt
         pip install werkzeug
         pip install flask-sqlalchemy
-        pip install python env
+        pip install python-dotenv
         pip install psycopg2-binary
     - name: Running test cases for restAPI
       run: pytest test/test_restAPI.py
