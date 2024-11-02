@@ -190,7 +190,7 @@ def test_add_to_watchlist_duplicate(client, mocker):
         assert response.status_code == 409
         assert response.json['Error'] == 'Item already in watchlist'
 
-
+#test for deleting from watchlist
 def test_get_watchlist(client, mocker):
     with app.app_context():
         # Mock `jwt.decode` to return a specific payload without verifying a real token
@@ -226,5 +226,88 @@ def test_get_watchlist(client, mocker):
         assert len(response.json['watchlist']) == 2
         assert response.json['watchlist'][0]['imdbID'] == 'tt0113041'
         assert response.json['watchlist'][1]['imdbID'] == 'tt0112453'
+
+
+#test for deleting from watchlist
+def test_delete_from_watchlist(client, mocker):
+    with app.app_context():
+        # Mock `jwt.decode` to return a specific payload without verifying a real token
+        mock_jwt_decode = mocker.patch('jwt.decode')
+        mock_jwt_decode.return_value = {'user_id': 103}  # Set `user_id` to 103 for this test
+
+        # Set up the user and watchlist database
+        user = User(id=103, username='testuser7', password=generate_password_hash('testpassword'))
+        db.session.add(user)
+        db.session.commit()
+
+        # Add a movie to the user's watchlist
+        watchlist_item = Watchlist(user_id=103, imdb_id='tt1234567')
+        db.session.add(watchlist_item)
+        db.session.commit()
+
+        # Mock the Watchlist query to simulate that the movie is in the watchlist
+        mock_watchlist_query = mocker.patch('src.models.user_models.Watchlist.query')
+        mock_watchlist_query.filter_by.return_value.first.return_value = watchlist_item
+
+        # Delete the movie from the watchlist with Authorization header
+        response = client.delete(
+            '/deleteFromWatchlist',
+            json={'imdbID': 'tt1234567'},
+            headers={"Authorization": "Bearer mock-token"}
+        )
+
+        # Assertions for a successful deletion
+        assert response.status_code == 201
+        assert response.json['deletedFromWatchlist'] == True
+        assert response.json['message'] == 'Watchlist entry deleted successfully'
+
+
+
+#deletion duplication
+def test_delete_from_watchlist_already_deleted(client, mocker):
+    with app.app_context():
+        # Mock `jwt.decode` to return a specific payload without verifying a real token
+        mock_jwt_decode = mocker.patch('jwt.decode')
+        mock_jwt_decode.return_value = {'user_id': 104}  # Set `user_id` to 103 for this test
+
+        # Set up the user and watchlist database
+        user = User(id=104, username='testuser8', password=generate_password_hash('testpassword'))
+        db.session.add(user)
+        db.session.commit()
+
+        # Add a movie to the user's watchlist
+        watchlist_item = Watchlist(user_id=104, imdb_id='tt1234567')
+        db.session.add(watchlist_item)
+        db.session.commit()
+
+        # Mock the Watchlist query to simulate that the movie is in the watchlist
+        mock_watchlist_query = mocker.patch('src.models.user_models.Watchlist.query')
+        mock_watchlist_query.filter_by.return_value.first.return_value = watchlist_item
+
+        # Delete the movie from the watchlist with Authorization header
+        response = client.delete(
+            '/deleteFromWatchlist',
+            json={'imdbID': 'tt1234567'},
+            headers={"Authorization": "Bearer mock-token"}
+        )
+
+        # Assertions for a successful deletion
+        assert response.status_code == 201
+        assert response.json['deletedFromWatchlist'] == True
+        assert response.json['message'] == 'Watchlist entry deleted successfully'
+
+        # Case 2: Attempt to delete a movie not in the watchlist
+        # Simulate that the movie is not in the user's watchlist
+        mock_watchlist_query.filter_by.return_value.first.return_value = None
+
+        response = client.delete(
+            '/deleteFromWatchlist',
+            json={'imdbID': 'tt9999999'},
+            headers={"Authorization": "Bearer mock-token"}
+        )
+
+        # Assertions for non-existent watchlist entry deletion attempt
+        assert response.status_code == 409
+        assert response.json['error'] == 'Item not already in watchlist'
 
 
