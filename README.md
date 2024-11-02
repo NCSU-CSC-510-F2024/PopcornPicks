@@ -104,6 +104,8 @@ PopcornPicks is a user-friendly movie recommender that curates a tailored list o
 <code><a href="https://www.jquery.com//" target="_blank"><img height="35" src="https://www.vectorlogo.zone/logos/jquery/jquery-horizontal.svg"></a></code>
 <code><a href="https://getbootstrap.com/" target="_blank"><img height="35" src="https://www.vectorlogo.zone/logos/getbootstrap/getbootstrap-ar21.svg"></a></code>
 <code><a href="https://flask.palletsprojects.com/en/1.1.x/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-ar21.svg"></a></code>
+<code><a href="https://www.docker.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/docker/docker-icon.svg"></a></code>
+<code><a href="https://react.dev/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg"></a></code>
 <!--<code><a href="https://github.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/github/github-ar21.svg"></a></code>
  <code><a href="https://git-scm.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/git-scm/git-scm-ar21.svg"></a></code>
 <code><a href="https://github.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/github/github-ar21.svg"></a></code> -->
@@ -144,7 +146,7 @@ PopcornPicks is a user-friendly movie recommender that curates a tailored list o
 PopcornPicks is a dynamic project with endless possibilities for expansion and enhancement. Here are some exciting avenues for future development:
 
 
-1. **User Profiles and Preferences**: Implement user profiles where users can save their preferences, ratings, and watch history for a more personalized movie discovery experience.
+1. **Performance Enhancement**: Implement load-balancing to ensure robust operation in high-traffic.
 
 2. **Integration with Streaming Services**: Integrate with popular streaming services to provide real-time availability information and seamless access to recommended movies.
 
@@ -162,6 +164,7 @@ Please refer to the [CONTRIBUTING.md](https://github.com/adipai/PopcornPicks/blo
 [Jonas Trepanier](https://www.linkedin.com/in/jonas-trepanier-b96a2a241/)<br/>
 [Siddhi Mule](https://www.linkedin.com/in/siddhi-mule27/)<br/>
 [Anirduh Kaluri](https://www.linkedin.com/in/anirudhkaluri/)<br/>
+
 ## Original Contributors:
 [Aditya Pai Brahmavar](https://www.linkedin.com/in/adityapai16/)<br/>
 [Ananya Mantravadi](https://www.linkedin.com/in/ananya-mantravadi/)<br/>
