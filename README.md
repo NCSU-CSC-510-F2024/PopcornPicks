@@ -59,7 +59,7 @@ PopcornPicks: Your movie recommender! Input movies, get tailored suggestions, an
 Checkout for project documentation at our [wiki page](https://github.com/CSCI510testerhw1/PopcornPicks/wiki)
 
 ## Features
-For a detailed breakdown of our current features, see our video: - https://youtu.be/ymAo_zXfZ0c
+For a detailed breakdown of our current features, see our video: - https://youtu.be/vaSMBwAT0yw
 
 ## Project Description
 PopcornPicks is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, PopcornPicks offers the convenience of saving recommendations to your account watchlist, enhancing the movie-watching experience. For the system architecture and other details, please refer to our [wiki page](https://github.com/CSCI510testerhw1/PopcornPicks/wiki)
