@@ -42,19 +42,19 @@ app.config['SECRET_KEY']=os.getenv('APP_SECRET_KEY')
 #cors = CORS(app, resources={r"/*": {"origins": "*"}})
 CORS(app, origins=["http://frontend:3000","http://localhost:3000"])  # Allow requests from frontend container
 
-@app.route("/")
-def landing_page():
-    """
-    Renders the landing page.
-    """
-    return render_template("landing_page.html")
+# @app.route("/")
+# def landing_page():
+#     """
+#     Renders the landing page.
+#     """
+#     return render_template("landing_page.html")
 
-@app.route("/search_page")
-def search_page():
-    '''
-    Returns the search page
-    '''
-    return render_template("search_page.html")
+# @app.route("/search_page")
+# def search_page():
+#     '''
+#     Returns the search page
+#     '''
+#     return render_template("search_page.html")
 
 @app.route("/login",methods=['POST'])
 def login_user():
@@ -191,7 +191,7 @@ def get_watchlist():
                 "imdbID":movie.imdb_id
             })
 
-            return jsonify({"watchlist":modified_watchlist})
+        return jsonify({"watchlist":modified_watchlist})
     except Exception as e:
         return jsonify({"error":f"error fetching movies{e}"})
 
@@ -279,32 +279,32 @@ def search():
     return resp
 
 
-@app.route("/feedback", methods=["POST"])
-def feedback():
-    """
-    Handles user feedback submission and mails the results.
-    """
-    data = json.loads(request.data)
-    return data
+# @app.route("/feedback", methods=["POST"])
+# def feedback():
+#     """
+#     Handles user feedback submission and mails the results.
+#     """
+#     data = json.loads(request.data)
+#     return data
 
 
-@app.route("/sendMail", methods=["POST"])
-def send_mail():
-    """
-    Handles user feedback submission and mails the results.
-    """
-    data = json.loads(request.data)
-    user_email = data['email']
-    send_email_to_user(user_email, beautify_feedback_data(data))
-    return data
+# @app.route("/sendMail", methods=["POST"])
+# def send_mail():
+#     """
+#     Handles user feedback submission and mails the results.
+#     """
+#     data = json.loads(request.data)
+#     user_email = data['email']
+#     send_email_to_user(user_email, beautify_feedback_data(data))
+#     return data
 
 
-@app.route("/success")
-def success():
-    """
-    Renders the success page.
-    """
-    return render_template("success.html")
+# @app.route("/success")
+# def success():
+#     """
+#     Renders the success page.
+#     """
+#     return render_template("success.html")
 
 
 if __name__ == "__main__":
