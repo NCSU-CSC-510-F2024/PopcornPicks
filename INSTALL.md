@@ -6,4 +6,5 @@
 3. Copy and paste the contents of [.env.example](https://github.com/CSCI510testerhw1/PopcornPicks/blob/master/.env.example) into your .env file and save. 
 4. Now run the docker with the following command.
 `docker compose up -d --build`
-5. That's it! Enjoy the service!!
+5. That's it! Enjoy the service!! The frontend will be hosted on:
+`http://localhost:3000/`
