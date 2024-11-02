@@ -9,6 +9,7 @@ from werkzeug.security import generate_password_hash
 
 app.config['TESTING'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+app.config['SECRET_KEY']="a8f5f167f44f4964e6c998d40d8d21"
 with app.app_context():
     db.init_app(app)
     db.create_all()
