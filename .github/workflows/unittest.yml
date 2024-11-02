@@ -26,6 +26,12 @@ jobs:
         pip install flask-bcrypt
         pip install pytest-mock
         pip install pytest-cov
+        pip install numpy
+        pip install pyjwt
+        pip install werkdzeug
+        pip install flask-sqlalchemy
+        pip install python env
+        pip install psycopg2-binary
     - name: Running test cases for restAPI
       run: pytest test/test_restAPI.py
     - name: Running test cases for predicting

@@ -22,9 +22,17 @@ jobs:
           pip install pandas
           pip install -U Flask
           pip install -U flask-cors
-          pip install pytest
-          pip install pytest-cov
           pip install docker
+          pip install pytest
+          pip install flask-bcrypt
+          pip install pytest-mock
+          pip install pytest-cov
+          pip install numpy
+          pip install pyjwt
+          pip install werkdzeug
+          pip install flask-sqlalchemy
+          pip install python env
+          pip install psycopg2-binary
 
       - name: Run tests and generate coverage
         run: |
