@@ -28,8 +28,8 @@ from src.models.user_models import db, User, Watchlist
 from src.prediction_scripts.item_based import recommend_for_new_user
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
-from search import Search
-from utils import beautify_feedback_data, send_email_to_user
+from src.recommenderapp.search import Search
+from src.recommenderapp.utils import beautify_feedback_data, send_email_to_user
 app= Flask(__name__)
 #format for the value in below key-value pair is postgresql://username:password@host:port/database_name
 app.config['SQLALCHEMY_DATABASE_URI']= f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PW')}@postgres:5432/{os.getenv('POSTGRES_DB')}"
@@ -38,22 +38,23 @@ app.config['SECRET_KEY']=os.getenv('APP_SECRET_KEY')
 
 
 
+
 #cors = CORS(app, resources={r"/*": {"origins": "*"}})
 CORS(app, origins=["http://frontend:3000","http://localhost:3000"])  # Allow requests from frontend container
 
-@app.route("/")
-def landing_page():
-    """
-    Renders the landing page.
-    """
-    return render_template("landing_page.html")
+# @app.route("/")
+# def landing_page():
+#     """
+#     Renders the landing page.
+#     """
+#     return render_template("landing_page.html")
 
-@app.route("/search_page")
-def search_page():
-    '''
-    Returns the search page
-    '''
-    return render_template("search_page.html")
+# @app.route("/search_page")
+# def search_page():
+#     '''
+#     Returns the search page
+#     '''
+#     return render_template("search_page.html")
 
 @app.route("/login",methods=['POST'])
 def login_user():
@@ -190,7 +191,7 @@ def get_watchlist():
                 "imdbID":movie.imdb_id
             })
 
-            return jsonify({"watchlist":modified_watchlist})
+        return jsonify({"watchlist":modified_watchlist})
     except Exception as e:
         return jsonify({"error":f"error fetching movies{e}"})
 
@@ -278,32 +279,32 @@ def search():
     return resp
 
 
-@app.route("/feedback", methods=["POST"])
-def feedback():
-    """
-    Handles user feedback submission and mails the results.
-    """
-    data = json.loads(request.data)
-    return data
+# @app.route("/feedback", methods=["POST"])
+# def feedback():
+#     """
+#     Handles user feedback submission and mails the results.
+#     """
+#     data = json.loads(request.data)
+#     return data
 
 
-@app.route("/sendMail", methods=["POST"])
-def send_mail():
-    """
-    Handles user feedback submission and mails the results.
-    """
-    data = json.loads(request.data)
-    user_email = data['email']
-    send_email_to_user(user_email, beautify_feedback_data(data))
-    return data
+# @app.route("/sendMail", methods=["POST"])
+# def send_mail():
+#     """
+#     Handles user feedback submission and mails the results.
+#     """
+#     data = json.loads(request.data)
+#     user_email = data['email']
+#     send_email_to_user(user_email, beautify_feedback_data(data))
+#     return data
 
 
-@app.route("/success")
-def success():
-    """
-    Renders the success page.
-    """
-    return render_template("success.html")
+# @app.route("/success")
+# def success():
+#     """
+#     Renders the success page.
+#     """
+#     return render_template("success.html")
 
 
 if __name__ == "__main__":
