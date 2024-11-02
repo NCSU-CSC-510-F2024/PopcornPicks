@@ -189,3 +189,42 @@ def test_add_to_watchlist_duplicate(client, mocker):
         # Assertions for duplicate watchlist entry error
         assert response.status_code == 409
         assert response.json['Error'] == 'Item already in watchlist'
+
+
+def test_get_watchlist(client, mocker):
+    with app.app_context():
+        # Mock `jwt.decode` to return a specific payload without verifying a real token
+        mock_jwt_decode = mocker.patch('jwt.decode')
+        mock_jwt_decode.return_value = {'user_id': 102}  # Set `user_id` to 102 for this test
+
+        # Set up the user and watchlist database
+        user = User(id=102, username='testuser6', password=generate_password_hash('testpassword'))
+        db.session.add(user)
+        db.session.commit()
+
+        # Add entries to the watchlist for the user
+        watchlist_item1 = Watchlist(user_id=102, imdb_id='tt0113041')
+        watchlist_item2 = Watchlist(user_id=102, imdb_id='tt0112453')
+        db.session.add(watchlist_item1)
+        db.session.add(watchlist_item2)
+        db.session.commit()
+
+        # Mock the Watchlist query to simulate retrieving items for this user
+        mock_watchlist_query = mocker.patch('src.models.user_models.Watchlist.query')
+        mock_watchlist_query.filter_by.return_value.all.return_value = [watchlist_item1, watchlist_item2]
+
+        # Get the user's watchlist with Authorization header
+        response = client.get(
+            '/getWatchlist',
+            headers={"Authorization": "Bearer mock-token"}
+        )
+
+        # Assertions for a successful watchlist retrieval
+        assert response.status_code == 200
+        #assert response.json['user_id'] == 102
+        assert 'watchlist' in response.json
+        assert len(response.json['watchlist']) == 2
+        assert response.json['watchlist'][0]['imdbID'] == 'tt0113041'
+        assert response.json['watchlist'][1]['imdbID'] == 'tt0112453'
+
+
