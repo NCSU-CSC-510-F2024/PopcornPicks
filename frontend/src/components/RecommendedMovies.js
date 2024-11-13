@@ -4,7 +4,14 @@ import { Badge, Button, Card, Col, OverlayTrigger, Row, Tooltip } from "react-bo
 
 import React from "react";
 
-const RecommendedMovies = ({ movies, genres, imdbIds, watchlistStatus, onWatchlistToggle }) => {
+const RecommendedMovies = ({
+    movies,
+    genres,
+    imdbIds,
+    watchlistStatus,
+    onWatchlistToggle,
+    imdbRatings,
+}) => {
     if (movies.length === 0) {
         return null;
     }
@@ -33,6 +40,12 @@ const RecommendedMovies = ({ movies, genres, imdbIds, watchlistStatus, onWatchli
                                             </Badge>
                                         </OverlayTrigger>
                                     ))}
+                                </div>
+
+                                <div className="rating-container">
+                                    <Badge bg="info" className="me-1 mb-1">
+                                        {imdbRatings[index]}/10
+                                    </Badge>
                                 </div>
                                 <a
                                     href={`https://www.imdb.com/title/${imdbIds[index]}`}

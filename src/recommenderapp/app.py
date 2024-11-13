@@ -29,13 +29,12 @@ from src.prediction_scripts.item_based import recommend_for_new_user
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from src.recommenderapp.search import Search
-from src.recommenderapp.utils import beautify_feedback_data, send_email_to_user
+from src.recommenderapp.utils import beautify_feedback_data, send_email_to_user, get_imdb_rating
 app= Flask(__name__)
 #format for the value in below key-value pair is postgresql://username:password@host:port/database_name
 app.config['SQLALCHEMY_DATABASE_URI']= f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PW')}@postgres:5432/{os.getenv('POSTGRES_DB')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY']=os.getenv('APP_SECRET_KEY')
-
 
 
 
@@ -242,15 +241,22 @@ def predict():
     recommendations, genres, imdb_id = recommend_for_new_user(training_data)
     recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
     isInWatchList=[]
+    imdb_ratings = []
     for imdb in imdb_id:
+        rating = get_imdb_rating(imdb)
+        if rating is not None:
+            imdb_ratings.append(str(rating))
+        else:
+            imdb_ratings.append("N/A")
         existing_watchlist_movie=Watchlist.query.filter_by(user_id=request.userID,imdb_id=imdb).first()
         if existing_watchlist_movie is not None:
             isInWatchList.append(True)
         else:
             isInWatchList.append(False)
 
-    resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id, "Watchlist_status": isInWatchList}
+    resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id, "Watchlist_status": isInWatchList, "imdb_ratings": imdb_ratings}
     return resp
+
 
 
 @app.route("/search", methods=["POST"])
