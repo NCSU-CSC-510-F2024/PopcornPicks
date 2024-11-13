@@ -59,6 +59,7 @@ const SearchMovies = () => {
 
         setLoading(true);
         try {
+            console.log("Selected movies:", selectedMovies); // Debug log
             const response = await predictMovies(selectedMovies);
             setRecommendations(response.recommendations);
             setGenres(response.genres);

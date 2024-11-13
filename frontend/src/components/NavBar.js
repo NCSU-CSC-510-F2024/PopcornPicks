@@ -1,9 +1,9 @@
-import '../stylesheet.css';
+import "../stylesheet.css";
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
-import React from 'react';
-import { useAuth } from '../AuthContext';
+import React from "react";
+import { useAuth } from "../AuthContext";
 
 const Navbar = () => {
     const { token, logout } = useAuth();
@@ -11,16 +11,28 @@ const Navbar = () => {
 
     const handleLogout = () => {
         logout();
-        navigate('/');
+        navigate("/");
     };
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark fixed-top" style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}>
+        <nav
+            className="navbar navbar-expand-lg navbar-dark fixed-top"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
             <div className="container-fluid">
-                <Link className="navbar-brand" to="/" style={{ color: '#e50914', fontSize: '1.5rem', fontWeight: 'bold' }}>
+                <Link
+                    className="navbar-brand"
+                    to="/"
+                    style={{ color: "#e50914", fontSize: "1.5rem", fontWeight: "bold" }}>
                     PopcornPicks🍿
                 </Link>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -28,24 +40,41 @@ const Navbar = () => {
                         {token && (
                             <>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/watchlist">Watchlist</Link>
+                                    <Link className="nav-link" to="/home">
+                                        Home
+                                    </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/search">Search</Link>
+                                    <Link className="nav-link" to="/watchlist">
+                                        Watchlist
+                                    </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/wall">Wall</Link>
+                                    <Link className="nav-link" to="/search">
+                                        Search
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/wall">
+                                        Wall
+                                    </Link>
                                 </li>
                             </>
                         )}
                     </ul>
                     <div className="d-flex">
                         {token ? (
-                            <button onClick={handleLogout} className="btn btn-outline-danger">Logout</button>
+                            <button onClick={handleLogout} className="btn btn-outline-danger">
+                                Logout
+                            </button>
                         ) : (
                             <>
-                                <Link to="/login" className="btn btn-outline-light me-2">Login</Link>
-                                <Link to="/register" className="btn btn-danger">Sign Up</Link>
+                                <Link to="/login" className="btn btn-outline-light me-2">
+                                    Login
+                                </Link>
+                                <Link to="/register" className="btn btn-danger">
+                                    Sign Up
+                                </Link>
                             </>
                         )}
                     </div>
