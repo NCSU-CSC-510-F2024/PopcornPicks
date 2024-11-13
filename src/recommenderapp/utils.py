@@ -7,6 +7,8 @@ This code is licensed under MIT license (see LICENSE for details)
 
 import logging
 import smtplib
+import pandas as pd
+from imdb import Cinemagoer
 from smtplib import SMTPException
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -172,3 +174,17 @@ def send_email_to_user(recipient_email, categorized_data):
 
     finally:
         server.quit()
+
+
+def get_imdb_rating(imdb_id):
+    """
+    Get the IMDB rating of a movie.
+    """
+    cg = Cinemagoer()
+    imdb_id = imdb_id[2:] # Remove the "tt" prefix
+    try:
+        movie = cg.get_movie(imdb_id)
+        return movie.data['rating']
+    except Exception as e:
+        logging.error("Error while fetching IMDB rating: %s", str(e))
+        return None
