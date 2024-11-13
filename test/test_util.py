@@ -12,8 +12,7 @@ from pathlib import Path
 import pandas as pd
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 #pylint: disable=wrong-import-position
-from src.recommenderapp.utils import create_colored_tags, \
-    beautify_feedback_data, create_movie_genres, send_email_to_user
+from src.recommenderapp.utils import create_colored_tags, beautify_feedback_data, create_movie_genres, send_email_to_user, get_imdb_rating
 #pylint: enable=wrong-import-position
 
 warnings.filterwarnings("ignore")
@@ -72,6 +71,16 @@ class Tests(unittest.TestCase):
             'Cutthroat Island (1995)'], "Yet to Watch": ['Assassins (1995)']}
         with self.assertRaises(Exception):
             send_email_to_user("wrong_email", beautify_feedback_data(data))
+
+    
+    def test_get_imdb_rating(self):
+        """
+        Test case 5
+        """
+
+        imdb_id = "tt0113277" # Id for Heat (1995)
+        result = get_imdb_rating(imdb_id)
+        self.assertTrue(result == 8.3)
 
 
 if __name__ == "__main__":

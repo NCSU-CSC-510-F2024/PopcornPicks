@@ -111,6 +111,32 @@ def test_create_existing_user(client,mocker):
         assert response.json['error'] == 'Username already exists'
 
 
+# Test for successful prediction
+# Test with added imdb_ratings field
+def test_predict_movies(client, mocker):
+    with app.app_context():
+        # Mock `jwt.decode` to return a specific payload without verifying a real token
+        mock_jwt_decode = mocker.patch('jwt.decode')
+        mock_jwt_decode.return_value = {'user_id': 100}  # Set `user_id` to 1 for this test
+
+        user = User(id=100, username='testuser_prediction', password=generate_password_hash('testpassword'))
+        db.session.add(user)
+        db.session.commit()
+
+        response = client.post('/predict',
+                            json={"movie_list":["Fight Club (1999)","Monkey Trouble (1994)","Monkey Business (1952)"]}, 
+                            headers={"Authorization": "Bearer mock-token"})
+
+        assert response.status_code == 200
+        assert 'recommendations' in response.json
+        assert len(response.json['recommendations']) == 10
+        assert 'imdb_id' in response.json
+        assert 'genres' in response.json
+        assert 'Watchlist_status' in response.json
+        assert 'imdb_ratings' in response.json
+
+
+
 
 def test_add_to_watchlist(client, mocker):
     with app.app_context():
