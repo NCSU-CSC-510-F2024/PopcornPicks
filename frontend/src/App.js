@@ -14,6 +14,8 @@ import React from 'react';
 import Register from './components/Register';
 import SearchMovies from './components/SearchMovies';
 import Watchlist from './components/Watchlist';
+import Wall from './components/Wall';
+
 
 function App() {
   return (
@@ -47,6 +49,13 @@ function App() {
               <Watchlist />
             </ProtectedRoute>
           } />
+
+          <Route path="/wall" element={
+            <ProtectedRoute authRequired={true}>
+              <Wall />
+            </ProtectedRoute>
+          } />
+
           {/* Catch-all route */}
           <Route path="*" element={
             <ProtectedRoute authRequired={true}>

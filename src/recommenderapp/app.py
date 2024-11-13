@@ -24,12 +24,13 @@ from datetime import datetime, timedelta
 from dotenv import load_dotenv
 load_dotenv()
 from werkzeug.security import generate_password_hash,check_password_hash
-from src.models.user_models import db, User, Watchlist
+from src.models.user_models import db, User, Watchlist, Movies, Ratings, Friends
 from src.prediction_scripts.item_based import recommend_for_new_user
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
+from flask_cors import cross_origin
 from src.recommenderapp.search import Search
-from src.recommenderapp.utils import beautify_feedback_data, send_email_to_user
+from src.recommenderapp.utils import beautify_feedback_data, send_email_to_user, submit_review
 app= Flask(__name__)
 #format for the value in below key-value pair is postgresql://username:password@host:port/database_name
 app.config['SQLALCHEMY_DATABASE_URI']= f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PW')}@postgres:5432/{os.getenv('POSTGRES_DB')}"
@@ -264,6 +265,39 @@ def search():
     resp = jsonify(filtered_dict)
     resp.status_code = 200
     return resp
+
+@app.route("/review", methods=["POST"])
+def review():
+    """
+    Handles the submission of a movie review
+    """
+    data = json.loads(request.data)
+    submit_review(db, get_user_id(), data["movie"], data["score"], data["review"])
+    return request.data
+
+@app.route("/getWallData", methods=["GET"])
+@get_user_id
+def wall_posts():
+    """
+    Gets the posts for the wall
+    """
+    ratings = Ratings.query.all()
+    if len(ratings) == 0:
+        return jsonify({'ratings': []}), 201
+    json_ratings = []
+    for rating in ratings:
+        movie = Movies.query.filter_by(idmovies=rating.movie_id).first()
+        user = User.query.filter_by(id=rating.user_id).first()
+        json_ratings.append({
+            'id': rating.idratings,
+            'username': user.username,
+            'movieTitle': movie.name,
+            'imdbID': movie.imdb_id,
+            'score': rating.score,
+            'review': rating.review,
+            'time': rating.time.isoformat()  # Convert the timestamp to a string format
+        })
+    return jsonify({'ratings': json_ratings}), 200
 
 
 

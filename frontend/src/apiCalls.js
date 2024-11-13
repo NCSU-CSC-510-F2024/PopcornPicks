@@ -80,4 +80,9 @@ export const sendMail = async (email, feedbackData) => {
   return response.data;
 };
 
+export const getWallData = async () => {
+  const response = await api.get(`${API_BASE_URL}/getWallData`);
+  return response.data;
+};
+
 export default api;

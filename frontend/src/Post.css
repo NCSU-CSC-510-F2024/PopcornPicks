@@ -1,0 +1,88 @@
+.post {
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 800px;
+  }
+  
+  .image {
+    margin-right: 15px;
+  }
+  
+  .image img {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .user-info {
+    flex: 1;
+  }
+  
+  .postTitle {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+  
+  .username {
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+  }
+  
+  .postTitleText {
+    color: #888;
+  }
+  
+  .moviename {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-left: 10px;
+  }
+  
+  .review {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .review svg {
+    margin-right: 2px;
+    color: #f39c12;
+  }
+  
+  .comment {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .movie-data {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-end; /* Align all items to the right */
+  }
+  
+  .movie-data div {
+    font-size: 0.9rem;
+    color: #777;
+    text-align: right; /* Ensure text inside each div is right-aligned */
+  }
+  
+  .movie-data .rated {
+    font-weight: bold;
+    color: #e74c3c;
+  }
+  
+  .movie-data .year,
+  .movie-data .genre,
+  .movie-data .runtime {
+    color: #3498db;
+  }
+  
