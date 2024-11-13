@@ -1,28 +1,28 @@
 # <i> PopcornPicks🍿: Your Destination for Movie Recommendations </i>
 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/graphs/commit-activity)
-[![Contributors Activity](https://img.shields.io/github/commit-activity/m/CSCI510testerhw1/PopcornPicks)](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/pulse)
-[![GitHub issues](https://img.shields.io/github/issues/CSCI510testerhw1/PopcornPicks.svg)](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/issues?q=is%3Aopen+is%3Aissue)
-[![GitHub issues-closed](https://img.shields.io/github/issues-closed/CSCI510testerhw1/PopcornPicks.svg)](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/issues?q=is%3Aissue+is%3Aclosed)
-![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/CSCI510testerhw1/PopcornPicks)
+[![Contributors Activity](https://img.shields.io/github/commit-activity/m/NCSU-CSC-510-F2024/PopcornPicks)](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/pulse)
+[![GitHub issues](https://img.shields.io/github/issues/NCSU-CSC-510-F2024/PopcornPicks.svg)](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/issues?q=is%3Aopen+is%3Aissue)
+[![GitHub issues-closed](https://img.shields.io/github/issues-closed/NCSU-CSC-510-F2024/PopcornPicks.svg)](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/issues?q=is%3Aissue+is%3Aclosed)
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/NCSU-CSC-510-F2024/PopcornPicks)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
 <!-- [![DOI](https://zenodo.org/badge/871659563.svg)](https://doi.org/10.5281/zenodo.14027582) -->
 
-[![Unittest](https://github.com/CSCI510testerhw1/PopcornPicks/actions/workflows/unittest.yml/badge.svg?branch=master&event=push)](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/actions/workflows/unittest.yml)
+[![Unittest](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/actions/workflows/unittest.yml/badge.svg?branch=master&event=push)](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/actions/workflows/unittest.yml)
 
 <!-- [![codecov](https://codecov.io/gh/CSCI510testerhw1/PopcornPicks/graph/badge.svg?token=HUMM2BTSQO)](https://codecov.io/gh/CSCI510testerhw1/PopcornPicks) -->
 
-[![GitHub release](https://img.shields.io/github/release/CSCI510testerhw1/PopcornPicks.svg)](https://GitHub.com/NCSU-CSC-510-F2024/PopcornPicksreleases/)
+[![GitHub release](https://img.shields.io/github/release/NCSU-CSC-510-F2024/PopcornPicks.svg)](https://GitHub.com/NCSU-CSC-510-F2024/PopcornPicksreleases/)
 [![StyleCheck: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
 
 <!-- [![HitCount](https://hits.dwyl.com/CSCI510testerhw1/PopcornPicks.svg)](https://hits.dwyl.com/CSCI510testerhw1/PopcornPicks)  -->
 
-![GitHub contributors](https://img.shields.io/github/contributors/CSCI510testerhw1/PopcornPicks)
-![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/CSCI510testerhw1/PopcornPicks)
-![GitHub repo size](https://img.shields.io/github/repo-size/CSCI510testerhw1/PopcornPicks)
+![GitHub contributors](https://img.shields.io/github/contributors/NCSU-CSC-510-F2024/PopcornPicks)
+![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/NCSU-CSC-510-F2024/PopcornPicks)
+![GitHub repo size](https://img.shields.io/github/repo-size/NCSU-CSC-510-F2024/PopcornPicks)
 
-<img src="https://github.com/CSCI510testerhw1/PopcornPicks/blob/master/asset/header_display.png" alt="drawing" style="width:1000px;"/>
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/header_display.png" alt="drawing" style="width:1000px;"/>
 <b>PopcornPicks is more than just a movie recommender system; it's a gateway to a world of cinematic adventures. With an ever-expanding library of films and a powerful recommendation algorithm, PopcornPicks is here to transform the way you discover, enjoy, and connect with movies. Now totally personalized with new user profiles!</b>
 
 # Contents
