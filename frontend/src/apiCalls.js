@@ -85,4 +85,14 @@ export const getWallData = async () => {
   return response.data;
 };
 
+export const addReview = async (review) => {
+  const response = await api.post(`${API_BASE_URL}/review`, { review });
+  return response.data;
+};
+
+export const getMovies = async () => {
+  const response = await api.get(`${API_BASE_URL}/movies`);
+  return response.data;
+};
+
 export default api;
