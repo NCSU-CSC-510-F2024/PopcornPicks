@@ -30,7 +30,13 @@ from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from flask_cors import cross_origin
 from src.recommenderapp.search import Search
-from src.recommenderapp.utils import beautify_feedback_data, send_email_to_user, get_imdb_rating, submit_review
+from src.recommenderapp.utils import beautify_feedback_data, send_email_to_user, get_imdb_rating
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 app= Flask(__name__)
 #format for the value in below key-value pair is postgresql://username:password@host:port/database_name
 app.config['SQLALCHEMY_DATABASE_URI']= f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PW')}@postgres:5432/{os.getenv('POSTGRES_DB')}"
@@ -273,12 +279,21 @@ def search():
     return resp
 
 @app.route("/review", methods=["POST"])
+@get_user_id
 def review():
     """
     Handles the submission of a movie review
     """
     data = json.loads(request.data)
-    submit_review(db, get_user_id(), data["movie"], data["score"], data["review"])
+    # logger.info("Received data: %s", data)  # Log the data variable
+
+    movie = Movies.query.filter_by(name=data["review"]["movie"]).first()
+    d = datetime.utcnow()
+    timestamp = d.strftime("%Y-%m-%d %H:%M:%S")
+
+    new_review = Ratings(user_id=request.userID, movie_id=movie.idmovies, score=data["review"]["score"], review=data["review"]["review"], time=timestamp)
+    db.session.add(new_review)
+    db.session.commit()
     return request.data
 
 @app.route("/getWallData", methods=["GET"])
@@ -304,6 +319,17 @@ def wall_posts():
             'time': rating.time.isoformat()  # Convert the timestamp to a string format
         })
     return jsonify({'ratings': json_ratings}), 200
+
+@app.route("/movies", methods=["GET"])
+def get_movies():
+    movies = Movies.query.all()
+    json_movies = []
+    for movie in movies:
+        json_movies.append({
+            'id': movie.idmovies,
+            'title': movie.name
+        })
+    return jsonify(json_movies)
 
 
 

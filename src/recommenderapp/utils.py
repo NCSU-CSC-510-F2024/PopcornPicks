@@ -92,22 +92,6 @@ def create_movie_genres(movie_genre_df):
         movie_to_genres[movie] = genres
     return movie_to_genres
 
-def submit_review(db, user, movie, score, review):
-    """
-    Utility function for creating a dictionary for submitting a review
-    """
-    executor = db.cursor()
-    executor.execute("SELECT idMovies FROM Movies WHERE name = %s", [movie])
-    movie_id = executor.fetchall()[0][0]
-    d = datetime.datetime.utcnow()
-    timestamp = d.strftime("%Y-%m-%d %H:%M:%S")
-    executor.execute(
-        "INSERT INTO Ratings(user_id, movie_id, score, review, time) \
-                        VALUES (%s, %s, %s, %s, %s);",
-        (int(user), int(movie_id), int(score), str(review), timestamp),
-    )
-    db.commit()
-
 
 def send_email_to_user(recipient_email, categorized_data):
     """

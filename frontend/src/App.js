@@ -16,6 +16,8 @@ import SearchMovies from "./components/SearchMovies";
 import Watchlist from "./components/Watchlist";
 import Wall from "./components/Wall";
 import Home from "./components/Home";
+import Review from "./components/Review";
+
 
 function App() {
     return (
@@ -79,6 +81,15 @@ function App() {
                         element={
                             <ProtectedRoute authRequired={true}>
                                 <Wall />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/review"
+                        element={
+                            <ProtectedRoute authRequired={true}>
+                                <Review />
                             </ProtectedRoute>
                         }
                     />

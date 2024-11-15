@@ -59,6 +59,11 @@ const Navbar = () => {
                                         Wall
                                     </Link>
                                 </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/review">
+                                        Review
+                                    </Link>
+                                </li>
                             </>
                         )}
                     </ul>
