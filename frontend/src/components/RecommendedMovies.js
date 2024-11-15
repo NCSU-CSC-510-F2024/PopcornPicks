@@ -105,20 +105,28 @@ const RecommendedMovies = ({
             <h2 className="mb-4">Recommended Movies</h2>
 
             <div className="d-flex justify-content-between align-items-center mb-3">
-                <DropdownButton
-                    id="sort-dropdown"
-                    title={`Sort by: ${sortCriteria} (${sortOrder === "asc" ? "Ascending" : "Descending"})`}
-                >
-                    <Dropdown.Item onClick={() => handleSortChange("Rating")}>
-                        Rating
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleSortChange("Title")}>
-                        Title
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleSortChange("Genre")}>
-                        Genre
-                    </Dropdown.Item>
-                </DropdownButton>
+            <Dropdown>
+                    <Dropdown.Toggle
+                        key={`${sortCriteria}-${sortOrder}`}
+                        variant="secondary" size="sm" id="sort-dropdown"
+                        className="custom-toggle"
+                    >
+                        <span className="me-2">Sort</span>
+                        <i className={`bi ${sortOrder === "asc" ? "bi-sort-up" : "bi-sort-down"}`}></i>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => handleSortChange("Rating")}>
+                            <i className="bi bi-star-fill me-2"></i> Rating
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleSortChange("Title")}>
+                            <i className="bi bi-film me-2"></i> Title
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleSortChange("Genre")}>
+                            <i className="bi bi-tag me-2"></i> Genre
+                        </Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
             </div>
             <Row xs={1} md={2} lg={3} className="g-4">
                 {currentMovies.map((movie, index) => (
