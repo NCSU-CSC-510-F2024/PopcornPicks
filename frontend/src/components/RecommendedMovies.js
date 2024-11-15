@@ -1,8 +1,8 @@
 import "../RecommendedMovies.css";
 
-import { Badge, Button, Card, Col, OverlayTrigger, Row, Tooltip, Pagination } from "react-bootstrap";
+import { Badge, Button, Card, Col, OverlayTrigger, Row, Tooltip, Pagination, Dropdown, DropdownButton} from "react-bootstrap";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 const RecommendedMovies = ({
     movies,
@@ -15,16 +15,80 @@ const RecommendedMovies = ({
 
     const moviesPerPage = 5;
     const [currentPage, setCurrentPage] = useState(1);
+    const [sortCriteria, setSortCriteria] = useState("Rating"); // Default sort criteria - rating.
+    const [sortOrder, setSortOrder] = useState("desc"); // Default to decending order.
 
     // Total number of pages.
     const totalPages = Math.ceil(movies.length / moviesPerPage);
 
+    // Sort the movies array based on selected criteria.
+    const sortedMoviesData = useMemo(() => { 
+        const sortedMovies = [...movies]
+        const sortedGenres = [...genres];
+        const sortedImdbIds = [...imdbIds];
+        const sortedWatchlistStatus = [...watchlistStatus];
+        const sortedImdbRatings = [...imdbRatings];
+
+        const sortedIndices = sortedMovies.map((_, i) => i);
+
+        sortedIndices.sort((a, b) => {
+            if (sortCriteria === "Rating") {
+                return sortOrder === "asc"
+                    ? imdbRatings[a] - imdbRatings[b]
+                    : imdbRatings[b] - imdbRatings[a];
+            } else if (sortCriteria === "Title") {
+                return sortOrder === "asc"
+                    ? movies[a].localeCompare(movies[b])
+                    : movies[b].localeCompare(movies[a]);
+            } else if (sortCriteria === "Genre") {
+                return sortOrder === "asc"
+                    ? genres[a].localeCompare(genres[b])
+                    : genres[b].localeCompare(genres[a]);
+            }
+            return 0;
+        });
+
+        return {
+            sortedMovies: sortedIndices.map(i => sortedMovies[i]),
+            sortedGenres: sortedIndices.map(i => sortedGenres[i]),
+            sortedImdbIds: sortedIndices.map(i => sortedImdbIds[i]),
+            sortedWatchlistStatus: sortedIndices.map(i => sortedWatchlistStatus[i]),
+            sortedImdbRatings: sortedIndices.map(i => sortedImdbRatings[i]),
+        };
+    }, [movies, genres, imdbIds, watchlistStatus, imdbRatings, sortCriteria, sortOrder]);
+
+    const handleSortChange = (criteria) => {
+        if (sortCriteria === criteria) {
+            setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+        } else {
+            setSortCriteria(criteria);
+            setSortOrder("asc"); 
+        }
+        setCurrentPage(1);
+    };
+
     const startIndex = (currentPage - 1) * moviesPerPage;
-    const currentMovies = movies.slice(startIndex, startIndex + moviesPerPage)
-    const currentGeneres = genres.slice(startIndex, startIndex + moviesPerPage)
-    const currentImdbIds = imdbIds.slice(startIndex, startIndex + moviesPerPage)
-    const currentWatchlistStatus = watchlistStatus.slice(startIndex, startIndex + moviesPerPage)
-    const currentImdbRatings = imdbRatings.slice(startIndex, startIndex + moviesPerPage)
+    const currentMovies = sortedMoviesData.sortedMovies.slice(
+        startIndex,
+        startIndex + moviesPerPage
+    );
+    const currentGeneres = sortedMoviesData.sortedGenres.slice(
+        startIndex,
+        startIndex + moviesPerPage
+    );
+    const currentImdbIds = sortedMoviesData.sortedImdbIds.slice(
+        startIndex,
+        startIndex + moviesPerPage
+    );
+    const currentWatchlistStatus = sortedMoviesData.sortedWatchlistStatus.slice(
+        startIndex,
+        startIndex + moviesPerPage
+    );
+    const currentImdbRatings = sortedMoviesData.sortedImdbRatings.slice(
+        startIndex,
+        startIndex + moviesPerPage
+    );
+
 
     // Handle page number change.
     const handlePageChange = (pageNumber) => { 
@@ -39,6 +103,23 @@ const RecommendedMovies = ({
     return (
         <div className="recommended-movies">
             <h2 className="mb-4">Recommended Movies</h2>
+
+            <div className="d-flex justify-content-between align-items-center mb-3">
+                <DropdownButton
+                    id="sort-dropdown"
+                    title={`Sort by: ${sortCriteria} (${sortOrder === "asc" ? "Ascending" : "Descending"})`}
+                >
+                    <Dropdown.Item onClick={() => handleSortChange("Rating")}>
+                        Rating
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleSortChange("Title")}>
+                        Title
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleSortChange("Genre")}>
+                        Genre
+                    </Dropdown.Item>
+                </DropdownButton>
+            </div>
             <Row xs={1} md={2} lg={3} className="g-4">
                 {currentMovies.map((movie, index) => (
                     <Col key={index}>
