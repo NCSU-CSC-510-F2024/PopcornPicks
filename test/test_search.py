@@ -92,6 +92,24 @@ class Tests(unittest.TestCase):
         ]
         self.assertTrue(filtered_dict == expected_resp)
 
+    def test_find_movie_data(self):
+        """
+        Test case 5
+        """
+        search_word = "Jumanji (1995)"
+        finder = Search()
+        result = finder.findMovieData(search_word)
+        self.assertTrue(result["imdb_id"] == "tt0113497")
+
+    def test_find_movie_data_invalid(self):
+        """
+        Test case 5
+        """
+        search_word = "Invalid Movie"
+        finder = Search()
+        result = finder.findMovieData(search_word)
+        self.assertTrue(result == [])
+
 
 if __name__ == "__main__":
     unittest.main()
