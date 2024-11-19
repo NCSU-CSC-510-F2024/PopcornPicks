@@ -90,9 +90,4 @@ export const addReview = async (review) => {
   return response.data;
 };
 
-export const getMovies = async () => {
-  const response = await api.get(`${API_BASE_URL}/movies`);
-  return response.data;
-};
-
 export default api;

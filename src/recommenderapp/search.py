@@ -7,6 +7,11 @@ This code is licensed under MIT license (see LICENSE for details)
 import os
 import pandas as pd
 #from flask import jsonify, request, render_template
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 app_dir = os.path.dirname(os.path.abspath(__file__))
@@ -67,6 +72,17 @@ class Search:
         Function to get top 10 results
         """
         return self.results(word)[:10]
+    
+    def findMovieData(self, word):
+        """
+        Function to find movie based on name and return all data
+        """
+        movie = []
+        for index, row in self.df.iterrows():
+            if row[1] == word:
+                movie = row
+                return movie
+        return movie
 
 
 #if __name__ == "__main__":
