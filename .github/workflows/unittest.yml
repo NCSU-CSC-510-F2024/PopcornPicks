@@ -30,4 +30,4 @@ jobs:
             - name: Test with pytest
               run: |
                   pip install pytest
-                  pytest test/
+                  pytest --verbose test/
