@@ -21,8 +21,8 @@ jobs:
             - name: Running test cases for restAPI
               run: pytest test/test_restAPI.py
             - name: Running test cases for predicting
-              run: python test/test_predict.py
+              run: pytest test/test_predict.py
             - name: Running test cases for searching
-              run: python test/test_search.py
+              run: pytest test/test_search.py
             - name: Running test cases for util
-              run: python test/test_util.py
+              run: pytest test/test_util.py
