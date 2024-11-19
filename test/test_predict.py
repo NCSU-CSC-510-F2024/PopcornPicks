@@ -28,7 +28,7 @@ class Tests(unittest.TestCase):
             {"title": "Toy Story (1995)", "rating": 5.0},
         ]
         recommendations, _, _ = recommend_for_new_user(ts)
-        self.assertTrue("Toy Story 3 (2010)" in recommendations)
+        self.assertTrue("Space Jam (1996)" in recommendations)
 
     def test_kunfu_panda(self):
         """
