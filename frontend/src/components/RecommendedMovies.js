@@ -17,7 +17,7 @@ const RecommendedMovies = ({
     imdbRatings,
 }) => {
 
-    const moviesPerPage = 10;
+    const moviesPerPage = 5;
     const [currentPage, setCurrentPage] = useState(1);
     const [sortCriteria, setSortCriteria] = useState("Rating"); // Default sort criteria - rating.
     const [sortOrder, setSortOrder] = useState("desc"); // Default to decending order.

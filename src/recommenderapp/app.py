@@ -247,7 +247,7 @@ def predict():
             training_data.append(movie_with_rating)
     recommendations, genres, imdb_id = recommend_for_new_user(training_data)
     length = len(recommendations)
-    recommendations, genres, imdb_id = recommendations[:min(100, length)], genres[:min(100, length)], imdb_id[:min(100, length)]
+    recommendations, genres, imdb_id = recommendations[:min(20, length)], genres[:min(20, length)], imdb_id[:min(20, length)]
     isInWatchList=[]
     imdb_ratings = []
     for imdb in imdb_id:
