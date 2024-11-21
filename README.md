@@ -6,19 +6,14 @@
 [![GitHub issues-closed](https://img.shields.io/github/issues-closed/NCSU-CSC-510-F2024/PopcornPicks.svg)](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/issues?q=is%3Aissue+is%3Aclosed)
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/NCSU-CSC-510-F2024/PopcornPicks)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
-
-<!-- [![DOI](https://zenodo.org/badge/871659563.svg)](https://doi.org/10.5281/zenodo.14027582) -->
-
 [![Unittest](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/actions/workflows/unittest.yml/badge.svg?branch=master&event=push)](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/actions/workflows/unittest.yml)
 [![codecov](https://codecov.io/gh/NCSU-CSC-510-F2024/PopcornPicks/graph/badge.svg?token=HVLUNDP321)](https://codecov.io/gh/NCSU-CSC-510-F2024/PopcornPicks)
-[![GitHub release](https://img.shields.io/github/release/NCSU-CSC-510-F2024/PopcornPicks.svg)](https://GitHub.com/NCSU-CSC-510-F2024/PopcornPicksreleases/)
+[![GitHub release](https://img.shields.io/github/release/NCSU-CSC-510-F2024/PopcornPicks.svg)](https://GitHub.com/NCSU-CSC-510-F2024/PopcornPicks/releases/)
 [![StyleCheck: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
 ![GitHub contributors](https://img.shields.io/github/contributors/NCSU-CSC-510-F2024/PopcornPicks)
 ![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/NCSU-CSC-510-F2024/PopcornPicks)
 ![GitHub repo size](https://img.shields.io/github/repo-size/NCSU-CSC-510-F2024/PopcornPicks)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14199398.svg)](https://doi.org/10.5281/zenodo.14199398)
-
-<!-- [![HitCount](https://hits.dwyl.com/CSCI510testerhw1/PopcornPicks.svg)](https://hits.dwyl.com/CSCI510testerhw1/PopcornPicks)  -->
 
 <img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/header_display.png" alt="drawing" style="width:1000px;"/>
 <b>PopcornPicks is more than just a movie recommender system; it's a gateway to a world of cinematic adventures. With an ever-expanding library of films and a powerful recommendation algorithm, PopcornPicks is here to transform the way you discover, enjoy, and connect with movies. Now totally personalized with new user profiles!</b>
@@ -103,11 +98,35 @@ PopcornPicks is a user-friendly movie recommender that curates a tailored list o
 <img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Generate_Watchlist.png" width="600" height="375">
 <img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Generate_Watchlist2.png" width="600" height="375">
 
+### Recommendation filtering
+
+**Several new features have been added to the recommendations, such as sorting, filtering and more!**
+
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Recommendation%20Filter.png" width="600" height="375">
+
 ### Watchlist
 
 **If you click the "Watchlist" tab in the header, you are taken to this page and shown what movies you've saved to your watchlist**
 
 <img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Watchlist.png" width="600" height="375">
+
+### Home Page
+
+**This page generates recommendations using some of the movies in your watchlist**
+
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Home%20Page.png" width="600" height="375">
+
+### Wall Page
+
+**This is where the user can view other user ratings for movies**
+
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Wall%20Page.png" width="600" height="375">
+
+### Review Page
+
+**Here, the user can select a movie to review, and add a review to the wall!**
+
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Review%20Page.png" width="600" height="375">
 
 ## Tech stack Used👨‍💻:
 
@@ -151,19 +170,24 @@ Or visit [INSTALL.md](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/ma
 
 PopcornPicks is a dynamic project with endless possibilities for expansion and enhancement. Here are some exciting avenues for future development:
 
-1. **Performance Enhancement**: Implement load-balancing to ensure robust operation in high-traffic.
-
-2. **Integration with Streaming Services**: Integrate with popular streaming services to provide real-time availability information and seamless access to recommended movies.
-
-3. **Movie Reviews and Ratings**: Allow users to write and read movie reviews and ratings, fostering a community of film critics and enthusiasts.
-
-4. **Improved Recommendation Algorithm**: Enhance the recommendation engine with more advanced machine learning models and collaborative filtering techniques to provide even more accurate and personalized movie suggestions.
+1. **Speed up recommendations**: Currently, the recommendation algorithm is extremely slow, especially the more movies you add to it. Look into alternative algorithms for recommendations.
+   Sorting/searching reviews on the wall
+2. **Add functionality to be able to sort the reviews of movies on the wall**: For example, be able to sort the reviews by the rating.
+3. **Incorporate user review and rating into the recommendations**: Using reviews submitted by users of the system in the recommendations can enhance the results to tailor to movies enjoyed by others.
+4. **Increase the size of the movie database**: The database has been consistent in size during this project, however to ensure the most accurate possible recommendations, increasing the number of movies would result in more rich recommendations.
+5. **Add TV shows to the database**: Expanding the scope of the project to include tv shows could improve the user experience.
 
 The future of PopcornPicks is full of potential, and we invite developers, movie lovers, and anyone passionate about cinema to join us in making this platform the ultimate movie companion.
 
 ## Contribute to the Project!
 
 Please refer to the [CONTRIBUTING.md](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/CONTRIBUTING.md) if you want to contribute to the PopcornPicks source code. Follow all the guidelines mentioned in the same and raise a pull request, we would love to look at it ❤️❤️!
+
+## Project 3 Contributors
+
+[Nico Field]()<br/>
+[Riley Joncas]()<br/>
+[Biruk Tadesse]()<br/>
 
 ## Contributors
 
