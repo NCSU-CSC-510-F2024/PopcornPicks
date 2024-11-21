@@ -11,7 +11,7 @@
 
 [![Unittest](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/actions/workflows/unittest.yml/badge.svg?branch=master&event=push)](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/actions/workflows/unittest.yml)
 [![codecov](https://codecov.io/gh/NCSU-CSC-510-F2024/PopcornPicks/graph/badge.svg?token=HVLUNDP321)](https://codecov.io/gh/NCSU-CSC-510-F2024/PopcornPicks)
-[![GitHub release](https://img.shields.io/github/release/NCSU-CSC-510-F2024/PopcornPicks.svg)](https://GitHub.com/NCSU-CSC-510-F2024/PopcornPicksreleases/)
+[![GitHub release](https://img.shields.io/github/release/NCSU-CSC-510-F2024/PopcornPicks.svg)](https://GitHub.com/NCSU-CSC-510-F2024/PopcornPicks/releases/)
 [![StyleCheck: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
 ![GitHub contributors](https://img.shields.io/github/contributors/NCSU-CSC-510-F2024/PopcornPicks)
 ![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/NCSU-CSC-510-F2024/PopcornPicks)
@@ -103,11 +103,35 @@ PopcornPicks is a user-friendly movie recommender that curates a tailored list o
 <img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Generate_Watchlist.png" width="600" height="375">
 <img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Generate_Watchlist2.png" width="600" height="375">
 
+### Recommendation filtering
+
+**Several new features have been added to the recommendations, such as sorting, filtering and more!**
+
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Recommendation%20Filter.png" width="600" height="375">
+
 ### Watchlist
 
 **If you click the "Watchlist" tab in the header, you are taken to this page and shown what movies you've saved to your watchlist**
 
 <img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Watchlist.png" width="600" height="375">
+
+### Home Page
+
+**This page generates recommendations using some of the movies in your watchlist**
+
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Home%20Page.png" width="600" height="375">
+
+### Wall Page
+
+**This is where the user can view other user ratings for movies**
+
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Wall%20Page.png" width="600" height="375">
+
+### Review Page
+
+**Here, the user can select a movie to review, and add a review to the wall!**
+
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Review%20Page.png" width="600" height="375">
 
 ## Tech stack Used👨‍💻:
 
@@ -163,6 +187,12 @@ The future of PopcornPicks is full of potential, and we invite developers, movie
 ## Contribute to the Project!
 
 Please refer to the [CONTRIBUTING.md](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/CONTRIBUTING.md) if you want to contribute to the PopcornPicks source code. Follow all the guidelines mentioned in the same and raise a pull request, we would love to look at it ❤️❤️!
+
+## Project 3 Contributors
+
+[Nico Field]()<br/>
+[Riley Joncas]()<br/>
+[Biruk Tadesse]()<br/>
 
 ## Contributors
 
