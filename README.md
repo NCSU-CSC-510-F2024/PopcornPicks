@@ -16,6 +16,7 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/NCSU-CSC-510-F2024/PopcornPicks)
 ![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/NCSU-CSC-510-F2024/PopcornPicks)
 ![GitHub repo size](https://img.shields.io/github/repo-size/NCSU-CSC-510-F2024/PopcornPicks)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14199398.svg)](https://doi.org/10.5281/zenodo.14199398)
 
 <!-- [![HitCount](https://hits.dwyl.com/CSCI510testerhw1/PopcornPicks.svg)](https://hits.dwyl.com/CSCI510testerhw1/PopcornPicks)  -->
 
