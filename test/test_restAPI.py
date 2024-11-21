@@ -129,7 +129,7 @@ def test_predict_movies(client, mocker):
 
         assert response.status_code == 200
         assert 'recommendations' in response.json
-        assert len(response.json['recommendations']) == 10
+        assert len(response.json['recommendations']) == 100
         assert 'imdb_id' in response.json
         assert 'genres' in response.json
         assert 'Watchlist_status' in response.json
