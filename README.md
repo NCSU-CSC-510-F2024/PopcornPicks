@@ -152,12 +152,11 @@ Or visit [INSTALL.md](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/ma
 PopcornPicks is a dynamic project with endless possibilities for expansion and enhancement. Here are some exciting avenues for future development:
 
 1. **Speed up recommendations**: Currently, the recommendation algorithm is extremely slow, especially the more movies you add to it. Look into alternative algorithms for recommendations.
-Sorting/searching reviews on the wall
+   Sorting/searching reviews on the wall
 2. **Add functionality to be able to sort the reviews of movies on the wall**: For example, be able to sort the reviews by the rating.
 3. **Incorporate user review and rating into the recommendations**: Using reviews submitted by users of the system in the recommendations can enhance the results to tailor to movies enjoyed by others.
 4. **Increase the size of the movie database**: The database has been consistent in size during this project, however to ensure the most accurate possible recommendations, increasing the number of movies would result in more rich recommendations.
 5. **Add TV shows to the database**: Expanding the scope of the project to include tv shows could improve the user experience.
-
 
 The future of PopcornPicks is full of potential, and we invite developers, movie lovers, and anyone passionate about cinema to join us in making this platform the ultimate movie companion.
 
