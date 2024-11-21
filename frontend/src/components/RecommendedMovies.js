@@ -451,7 +451,7 @@ const RecommendedMovies = ({
                                         size="sm"
                                         onClick={() =>
                                             onWatchlistToggle(
-                                                imdbIds[index],
+                                                currentImdbIds[index],
                                                 false,
                                                 index + startIndex
                                             )
