@@ -1,6 +1,7 @@
 // Import the component for your landing page
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import "./stylesheet.css"; //custom CSS file
 
 import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
