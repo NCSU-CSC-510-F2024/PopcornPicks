@@ -145,7 +145,7 @@ def test_add_to_watchlist(client, mocker):
         mock_jwt_decode.return_value = {'user_id': 100}  # Return a payload that sets `user_id` to 1
 
         # Set up the user and watchlist database
-        user = User(id=100, username='testuser4', password=generate_password_hash('testpassword'))
+        user = User(id=105, username='testuser4', password=generate_password_hash('testpassword'))
         db.session.add(user)
         db.session.commit()
 

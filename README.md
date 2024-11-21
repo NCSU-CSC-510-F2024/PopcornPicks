@@ -10,17 +10,14 @@
 <!-- [![DOI](https://zenodo.org/badge/871659563.svg)](https://doi.org/10.5281/zenodo.14027582) -->
 
 [![Unittest](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/actions/workflows/unittest.yml/badge.svg?branch=master&event=push)](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/actions/workflows/unittest.yml)
-
-<!-- [![codecov](https://codecov.io/gh/CSCI510testerhw1/PopcornPicks/graph/badge.svg?token=HUMM2BTSQO)](https://codecov.io/gh/CSCI510testerhw1/PopcornPicks) -->
-
+[![codecov](https://codecov.io/gh/NCSU-CSC-510-F2024/PopcornPicks/graph/badge.svg?token=HVLUNDP321)](https://codecov.io/gh/NCSU-CSC-510-F2024/PopcornPicks)
 [![GitHub release](https://img.shields.io/github/release/NCSU-CSC-510-F2024/PopcornPicks.svg)](https://GitHub.com/NCSU-CSC-510-F2024/PopcornPicksreleases/)
 [![StyleCheck: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
-
-<!-- [![HitCount](https://hits.dwyl.com/CSCI510testerhw1/PopcornPicks.svg)](https://hits.dwyl.com/CSCI510testerhw1/PopcornPicks)  -->
-
 ![GitHub contributors](https://img.shields.io/github/contributors/NCSU-CSC-510-F2024/PopcornPicks)
 ![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/NCSU-CSC-510-F2024/PopcornPicks)
 ![GitHub repo size](https://img.shields.io/github/repo-size/NCSU-CSC-510-F2024/PopcornPicks)
+
+<!-- [![HitCount](https://hits.dwyl.com/CSCI510testerhw1/PopcornPicks.svg)](https://hits.dwyl.com/CSCI510testerhw1/PopcornPicks)  -->
 
 <img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/header_display.png" alt="drawing" style="width:1000px;"/>
 <b>PopcornPicks is more than just a movie recommender system; it's a gateway to a world of cinematic adventures. With an ever-expanding library of films and a powerful recommendation algorithm, PopcornPicks is here to transform the way you discover, enjoy, and connect with movies. Now totally personalized with new user profiles!</b>
@@ -62,7 +59,7 @@ PopcornPicks: Your movie recommender! Input movies, get tailored suggestions, an
 
 ## Documentation
 
-Checkout for project documentation at our [wiki page](https://github.com/CSCI510testerhw1/PopcornPicks/wiki)
+Checkout for project documentation at our [wiki page](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/wiki)
 
 ## Features
 
@@ -70,7 +67,7 @@ For a detailed breakdown of our current features, see our video: - https://youtu
 
 ## Project Description
 
-PopcornPicks is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, PopcornPicks offers the convenience of saving recommendations to your account watchlist, enhancing the movie-watching experience. For the system architecture and other details, please refer to our [wiki page](https://github.com/CSCI510testerhw1/PopcornPicks/wiki)
+PopcornPicks is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, PopcornPicks offers the convenience of saving recommendations to your account watchlist, enhancing the movie-watching experience. For the system architecture and other details, please refer to our [wiki page](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/wiki)
 
 ## How to Use:
 
@@ -78,38 +75,38 @@ PopcornPicks is a user-friendly movie recommender that curates a tailored list o
 
 **This is the first screen you see when the service launches. From here you can either sign into your existing PopcornPicks account or create a new one.**
 
-<img src="https://github.com/CSCI510testerhw1/PopcornPicks/blob/master/asset/Start_Screen.png" width="600" height="375">
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Start_Screen.png" width="600" height="375">
 
 ### Sign Up Screen
 
 **The user creates a custom username and password to create their PopcornPicks account.**
 
-<img src="https://github.com/CSCI510testerhw1/PopcornPicks/blob/master/asset/Sign_up.png" width="600" height="375">
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Sign_up.png" width="600" height="375">
 
 ### Sign In Screen
 
 **The user enters their custom username and password to access their PopcornPicks account.**
 
-<img src="https://github.com/CSCI510testerhw1/PopcornPicks/blob/master/asset/Sign_in.png" width="600" height="375">
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Sign_in.png" width="600" height="375">
 
 ### Pick a Movie
 
 **Upon a successful log-in, the user is taken to this screen. Here they can choose up to 5 of their favorite movies to generate recommendations based off.**
 
-<img src="https://github.com/CSCI510testerhw1/PopcornPicks/blob/master/asset/Select_Movies.png" width="600" height="375">
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Select_Movies.png" width="600" height="375">
 
 ### Movie Recommendation Mechanism
 
 **The user selects up to 5 movies to get a tailored recommendation list they can choose to add to their Watchlist.**
 
-<img src="https://github.com/CSCI510testerhw1/PopcornPicks/blob/master/asset/Generate_Watchlist.png" width="600" height="375">
-<img src="https://github.com/CSCI510testerhw1/PopcornPicks/blob/master/asset/Generate_Watchlist2.png" width="600" height="375">
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Generate_Watchlist.png" width="600" height="375">
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Generate_Watchlist2.png" width="600" height="375">
 
 ### Watchlist
 
 **If you click the "Watchlist" tab in the header, you are taken to this page and shown what movies you've saved to your watchlist**
 
-<img src="https://github.com/CSCI510testerhw1/PopcornPicks/blob/master/asset/Watchlist.png" width="600" height="375">
+<img src="https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/asset/Watchlist.png" width="600" height="375">
 
 ## Tech stack Used👨‍💻:
 
@@ -134,18 +131,18 @@ PopcornPicks is a user-friendly movie recommender that curates a tailored list o
 Step 1:
 Git Clone the Repository
 
-    git clone https://github.com/CSCI510testerhw1/PopcornPicks.git
+    git clone https://github.com/NCSU-CSC-510-F2024/PopcornPicks.git
 
 (OR) Download the .zip file on your local machine from the following link
 
-    https://github.com/CSCI510testerhw1/PopcornPicks
+    https://github.com/NCSU-CSC-510-F2024/PopcornPicks
 
 Step 2:
 Follow the setup instructions in the wiki documentation
 
-    https://github.com/CSCI510testerhw1/PopcornPicks/wiki/Installation
+    https://github.com/NCSU-CSC-510-F2024/PopcornPicks/wiki/Installation
 
-Or visit [INSTALL.md](https://github.com/CSCI510testerhw1/PopcornPicks/blob/master/INSTALL.md)
+Or visit [INSTALL.md](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/INSTALL.md)
 
 <b>Finally, start enjoying personalized movie recommendations!</b>
 
@@ -165,7 +162,7 @@ The future of PopcornPicks is full of potential, and we invite developers, movie
 
 ## Contribute to the Project!
 
-Please refer to the [CONTRIBUTING.md](https://github.com/adipai/PopcornPicks/blob/master/CONTRIBUTING.md) if you want to contribute to the PopcornPicks source code. Follow all the guidelines mentioned in the same and raise a pull request, we would love to look at it ❤️❤️!
+Please refer to the [CONTRIBUTING.md](https://github.com/NCSU-CSC-510-F2024/PopcornPicks/blob/master/CONTRIBUTING.md) if you want to contribute to the PopcornPicks source code. Follow all the guidelines mentioned in the same and raise a pull request, we would love to look at it ❤️❤️!
 
 ## Contributors
 

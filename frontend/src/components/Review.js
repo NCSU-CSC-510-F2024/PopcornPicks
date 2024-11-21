@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './NavBar';
-import { Button, Container, ListGroup } from 'react-bootstrap';
+import { Button, Container, ListGroup, Modal } from 'react-bootstrap';
 import { addReview, getMovies, searchMovies } from '../apiCalls';
 import '../Review.css';
 
@@ -10,6 +10,16 @@ const Review = () => {
   const [selectedMovie, setSelectedMovie] = useState('');
   const [comments, setComments] = useState('');
   const [searchTerm, setSearchTerm] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => {
+    setSelectedMovie('');
+    setComments('');
+    setRating(0);
+    setSearchTerm("");
+    setShowModal(false);
+  }
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -51,11 +61,7 @@ const Review = () => {
       } catch (err) {
         console.log('Failed to submit review.');
       } finally {
-        alert(`Review submitted for ${selectedMovie}. Rating: ${rating}/10`);
-        setSelectedMovie('');
-        setComments('');
-        setRating(0);
-        setSearchTerm("");
+        handleShowModal();
       }
   };
 
@@ -125,9 +131,32 @@ const Review = () => {
                 value={comments}
                 onChange={(e) => setComments(e.target.value)}
             />
-            <button id="submit-btn" onClick={handleSubmit}>
+            <button id="submit-btn" onClick={handleSubmit} disabled={!selectedMovie || rating === 0 || comments.trim() === ''} className="custom-submit-btn">
                 Submit
             </button>
+
+            {/* Modal */}
+            <Modal show={showModal} onHide={handleCloseModal}>
+              <Modal.Header closeButton>
+                <Modal.Title className="text-dark">Review Submitted</Modal.Title>
+              </Modal.Header>
+              <Modal.Body className="text-dark">
+                <p>
+                  Your review for <strong>{selectedMovie}</strong> has been submitted successfully!
+                </p>
+                <p>
+                  <strong>Rating:</strong> {rating}/10
+                </p>
+                <p>
+                  <strong>Comments:</strong> {comments}
+                </p>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="primary" onClick={handleCloseModal}>
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal>
             </div>
         </div>
         </div>

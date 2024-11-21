@@ -19,6 +19,7 @@ pyjwt = "*"
 pytest-mock = "*"
 flask-bcrypt = "*"
 cinemagoer = "*"
+pylint = "*"
 
 [dev-packages]
 

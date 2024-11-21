@@ -24,7 +24,7 @@ from datetime import datetime, timedelta
 from dotenv import load_dotenv
 load_dotenv()
 from werkzeug.security import generate_password_hash,check_password_hash
-from src.models.user_models import db, User, Watchlist, Movies, Ratings, Friends
+from src.models.user_models import db, User, Watchlist, Ratings
 from src.prediction_scripts.item_based import recommend_for_new_user
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
@@ -288,11 +288,13 @@ def review():
     data = json.loads(request.data)
     # logger.info("Received data: %s", data)  # Log the data variable
 
-    movie = Movies.query.filter_by(name=data["review"]["movie"]).first()
     d = datetime.utcnow()
     timestamp = d.strftime("%Y-%m-%d %H:%M:%S")
 
-    new_review = Ratings(user_id=request.userID, movie_id=movie.idmovies, score=data["review"]["score"], review=data["review"]["review"], time=timestamp)
+    finder = Search()
+    movie = finder.findMovieData(data["review"]["movie"])
+
+    new_review = Ratings(user_id=request.userID, movie_name=movie["title"], movie_imdb=movie["imdb_id"], score=data["review"]["score"], review=data["review"]["review"], time=timestamp)
     db.session.add(new_review)
     db.session.commit()
     return request.data
@@ -308,29 +310,17 @@ def wall_posts():
         return jsonify({'ratings': []}), 201
     json_ratings = []
     for rating in ratings:
-        movie = Movies.query.filter_by(idmovies=rating.movie_id).first()
         user = User.query.filter_by(id=rating.user_id).first()
         json_ratings.append({
             'id': rating.idratings,
             'username': user.username,
-            'movieTitle': movie.name,
-            'imdbID': movie.imdb_id,
+            'movieTitle': rating.movie_name,
+            'imdbID': rating.movie_imdb,
             'score': rating.score,
             'review': rating.review,
             'time': rating.time.isoformat()  # Convert the timestamp to a string format
         })
     return jsonify({'ratings': json_ratings}), 200
-
-@app.route("/movies", methods=["GET"])
-def get_movies():
-    movies = Movies.query.all()
-    json_movies = []
-    for movie in movies:
-        json_movies.append({
-            'id': movie.idmovies,
-            'title': movie.name
-        })
-    return jsonify(json_movies)
 
 
 
